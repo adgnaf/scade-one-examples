@@ -1,0 +1,28 @@
+-- version swan: 2025.0 graph: 2.0
+{text%function subtractionT (i0: int32; i1: int32)
+      returns (o0: int32)
+      {
+      let o0 = i0 - i1;
+      }%text}
+
+function subtractionG (i0: int32;
+                       i1 : int32;)
+  returns (o0: int32;)
+{
+  diagram
+    (#0 expr #1 - #2
+      where
+        (#1 group)
+        (#2 group)
+    #pragma diagram {"xy":"H-7862;V-7988"} #end)
+    (#3 def o0
+    #pragma diagram {"xy":"H13138;V-7988"} #end)
+    (#4 expr i0
+    #pragma diagram {"xy":"H-28862;V-9888"} #end)
+    (#5 expr i1
+    #pragma diagram {"xy":"H-28862;V-6088"} #end)
+    
+    (#6 wire #4 => #1)
+    (#7 wire #5 => #2)
+    (#8 wire #0 => #3)
+}
