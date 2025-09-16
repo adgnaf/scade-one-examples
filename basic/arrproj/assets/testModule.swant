@@ -1,0 +1,25 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use module0;
+
+_harness harness_arrproj
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::arrproj
+                                          #pragma diagram {"xy":"H25250;V-325","wh":"20000;14000"} #end)
+    (#1 expr (node (i: int32^3^4) returns (o: int32^3) {
+             var
+             idx : int32 default = 0;
+             
+             let 
+             idx = 0 pre (idx+1);
+             o = (i.[idx] default [0,0,0]);
+             })([
+             [1,2,3],
+             [4,5,6],
+             [7,8,9],
+             [10,11,12]
+             ])
+    #pragma diagram {"xy":"H-23250;V-325","wh":"46000;24673"} #end)
+    
+    (#2 wire #1 => #0)
+}

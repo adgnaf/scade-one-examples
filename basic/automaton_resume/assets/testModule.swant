@@ -1,0 +1,16 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use module0;
+
+_harness harness_automatonResumeT
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::automatonResumeT
+                                          #pragma diagram {"xy":"H0;V0","wh":"20000;14000"} #end)
+}
+
+_harness harness_automatonResume
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::automatonResume
+                                          #pragma diagram {"xy":"H0;V0","wh":"20000;14000"} #end)
+}

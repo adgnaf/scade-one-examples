@@ -1,0 +1,17 @@
+-- version swan: 2025.0 graph: 2.0
+{text%function elemWiseAdd <<m>> (arr1: 'T ^m; arr2: 'T ^m)
+      returns (o_arr: 'T ^m) where 'T numeric
+      {
+      let 
+      o_arr = (map (
+              function (a: 'T; b: 'T) returns (o: 'T) {
+              let o = a + b;
+              }
+              )) <<m>> (arr1, arr2);
+      }%text}
+
+{text%function test ()
+      returns (o0: int32 ^2)
+      {
+      let o0 = elemWiseAdd <<2>> ([1,2], [3,4]);
+      }%text}

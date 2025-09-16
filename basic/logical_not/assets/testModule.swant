@@ -1,0 +1,20 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use module0;
+
+_harness harness_logical_not
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::logical_not
+                                          #pragma diagram {"xy":"H16850;V4413","wh":"20000;14000"} #end)
+    (#1 expr (node (i: bool^2) returns (o: bool) {
+             var 
+             idx : int32 default = 0;
+             
+             let 
+             o = (i.[idx] default false);
+             idx = 0 pre (idx + 1);
+             })([true, false])
+    #pragma diagram {"xy":"H-28650;V4413","wh":"40000;15376"} #end)
+    
+    (#2 wire #1 => #0)
+}

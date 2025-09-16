@@ -1,0 +1,22 @@
+-- version swan: 2025.0 graph: 2.0
+function lto (i0: int32;
+              i1 : int32;)
+  returns (o0: bool;)
+{
+  diagram
+    (#0 expr #1 <= #2
+      where
+        (#1 group)
+        (#2 group)
+    #pragma diagram {"xy":"H-23788;V-43288"} #end)
+    (#3 def o0
+    #pragma diagram {"xy":"H-2788;V-43288"} #end)
+    (#4 expr i0
+    #pragma diagram {"xy":"H-44788;V-45188"} #end)
+    (#5 expr i1
+    #pragma diagram {"xy":"H-44788;V-41388"} #end)
+    
+    (#6 wire #0 => #3)
+    (#7 wire #4 => #1)
+    (#8 wire #5 => #2)
+}

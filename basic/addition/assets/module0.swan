@@ -1,6 +1,6 @@
 -- version swan: 2025.0 graph: 2.0
-function additionG (i0: int32;
-                    i1 : int32;)
+function addition (i0: int32;
+                   i1 : int32;)
   returns (o0: int32;)
 {
   diagram
@@ -8,22 +8,15 @@ function additionG (i0: int32;
       where
         (#1 group)
         (#2 group)
-    #pragma diagram {"xy":"H-3900;V-9625"} #end)
+    #pragma diagram {"xy":"H-7275;V-8200"} #end)
     (#3 expr i0
-    #pragma diagram {"xy":"H-24900;V-11525"} #end)
+    #pragma diagram {"xy":"H-28275;V-10100"} #end)
     (#4 expr i1
-    #pragma diagram {"xy":"H-24900;V-7725"} #end)
+    #pragma diagram {"xy":"H-28275;V-6300"} #end)
     (#5 def o0
-    #pragma diagram {"xy":"H17100;V-9625"} #end)
+    #pragma diagram {"xy":"H13725;V-8200"} #end)
     
-    (#6 wire #0 => #5)
-    (#7 wire #3 => #1)
-    (#8 wire #4 => #2)
+    (#6 wire #3 => #1)
+    (#7 wire #4 => #2)
+    (#8 wire #0 => #5)
 }
-
-{text%function additionT (i0: int32; i1: int32)
-      returns (o0: int32)
-      {
-        let
-        o0 = i1 + i0;
-      }%text}

@@ -1,0 +1,27 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use module0;
+
+_harness harness_activate_if
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::activate_if
+                                          #pragma diagram {"xy":"H11075;V15835","wh":"20000;14000"} #end)
+    (#1 expr (node (i: int32^2^3) returns (o1: int32; o2: int32) {
+             var 
+             idx : int32 default =0;
+             
+             let 
+             o1 = (i.[idx][0] default 0);
+             o2 = (i.[idx][1] default 0);
+             idx = 0 pre (idx + 1);
+             })([[-1,1], [2,3], [7,5]])
+    #pragma diagram {"xy":"H-62925;V15835","wh":"54000;17235"} #end)
+    (#2 group
+    #pragma diagram {"xy":"H-20025;V15835","wh":"800;14000"} #end)
+    
+    (#3 wire #1 => #2)
+    (#4 wire #2 .(1) => #0 .(i0)
+    #pragma diagram {"wp":"v3000|#2 #0"} #end)
+    (#5 wire #2 .(2) => #0 .(i1)
+    #pragma diagram {"wp":"v-3000|#2 #0"} #end)
+}

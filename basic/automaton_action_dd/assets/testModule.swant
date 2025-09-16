@@ -1,0 +1,52 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use module0;
+
+_harness harness_action_dd_t
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::action_dd_t
+                                          #pragma diagram {"xy":"H0;V0","wh":"20000;14000"} #end)
+    (#1 expr true
+    #pragma diagram {"xy":"H-36400;V7400"} #end)
+    (#2 expr true
+    #pragma diagram {"xy":"H-36400;V-7400"} #end)
+    (#3 expr false
+    #pragma diagram {"xy":"H-35400;V-3700","wh":"10000;3200"} #end)
+    (#4 expr false
+    #pragma diagram {"xy":"H-35400;V0","wh":"10000;3200"} #end)
+    (#5 expr false
+    #pragma diagram {"xy":"H-35400;V3700","wh":"10000;3200"} #end)
+    
+    (#6 wire #1 => #0 .(unlock)
+    #pragma diagram {"wp":"#1 h17800 v-2167 #0"} #end)
+    (#7 wire #2 => #0 .(l)
+    #pragma diagram {"wp":"#2 h9600 v2167 #0"} #end)
+    (#8 wire #3 => #0 .(r))
+    (#9 wire #4 => #0 .(u))
+    (#10 wire #5 => #0 .(d))
+}
+
+_harness harness_action_dd
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::action_dd
+                                          #pragma diagram {"xy":"H0;V0","wh":"20000;14000"} #end)
+    (#1 expr true
+    #pragma diagram {"xy":"H-36400;V7400"} #end)
+    (#2 expr true
+    #pragma diagram {"xy":"H-36400;V-7400"} #end)
+    (#3 expr false
+    #pragma diagram {"xy":"H-35400;V-3700","wh":"10000;3200"} #end)
+    (#4 expr false
+    #pragma diagram {"xy":"H-35400;V0","wh":"10000;3200"} #end)
+    (#5 expr false
+    #pragma diagram {"xy":"H-35400;V3700","wh":"10000;3200"} #end)
+    
+    (#6 wire #1 => #0 .(unlock)
+    #pragma diagram {"wp":"#1 h17800 v-2167 #0"} #end)
+    (#7 wire #2 => #0 .(l)
+    #pragma diagram {"wp":"#2 h9600 v2167 #0"} #end)
+    (#8 wire #3 => #0 .(r))
+    (#9 wire #4 => #0 .(u))
+    (#10 wire #5 => #0 .(d))
+}

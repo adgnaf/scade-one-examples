@@ -1,0 +1,22 @@
+-- version swan: 2025.0 graph: 2.0
+function logical_or (i0: bool;
+                     i1 : bool;)
+  returns (o0: bool;)
+{
+  diagram
+    (#0 expr i0
+    #pragma diagram {"xy":"H-13475;V-12481"} #end)
+    (#1 def o0
+    #pragma diagram {"xy":"H32525;V-10581"} #end)
+    (#2 expr i1
+    #pragma diagram {"xy":"H-13475;V-8681"} #end)
+    (#3 expr #4 or #5
+      where
+        (#4 group)
+        (#5 group)
+    #pragma diagram {"xy":"H9525;V-10581"} #end)
+    
+    (#6 wire #0 => #4)
+    (#7 wire #2 => #5)
+    (#8 wire #3 => #1)
+}

@@ -1,0 +1,32 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use module0;
+
+_harness harness_modTest
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::modTest
+                                          #pragma diagram {"xy":"H28950;V650","wh":"20000;14000"} #end)
+    (#1 expr (node (i: int32^2^3) returns (o0: int32; o1: int32) {
+             var
+             idx : int32 default = 0;
+             
+             let 
+             
+             idx = 0 pre (idx+1);
+             o0 = (i.[idx][0] default 0);
+             o1 = (i.[idx][1] default 0);
+             })([
+             [3,6],
+             [5,3],
+             [4,7]
+             ])
+    #pragma diagram {"xy":"H-45050;V650","wh":"54000;26533"} #end)
+    (#2 group
+    #pragma diagram {"xy":"H-2150;V650","wh":"800;14000"} #end)
+    
+    (#3 wire #1 => #2)
+    (#4 wire #2 .(1) => #0 .(i0)
+    #pragma diagram {"wp":"v3000|#2 #0"} #end)
+    (#5 wire #2 .(2) => #0 .(i1)
+    #pragma diagram {"wp":"v-3000|#2 #0"} #end)
+}

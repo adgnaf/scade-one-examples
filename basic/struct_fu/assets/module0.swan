@@ -1,0 +1,38 @@
+-- version swan: 2025.0 graph: 2.0
+type T = {bval: bool, uival: uint8};
+
+function struct_fu ()
+  returns (o0: T;
+           o1 : T;)
+{
+  diagram
+    (#0 expr false
+    #pragma diagram {"xy":"H-52650;V-31675","wh":"10000;3200"} #end)
+    (#1 expr 24
+    #pragma diagram {"xy":"H-51650;V-27875"} #end)
+    (#2 expr {bval: true, uival: 42} : T
+    #pragma diagram {"xy":"H-62650;V-35475","wh":"30000;3200"} #end)
+    (#3 expr (({bval: true, uival: 42} : T) with 
+                 .bval = false;
+                 .uival = 24)
+    #pragma diagram {"xy":"H-60662;V-14361","wh":"38000;6078"} #end)
+    (#4 def o0
+    #pragma diagram {"xy":"H-3650;V-33575"} #end)
+    (#5 expr
+      (#6 with
+        .bval = #7;
+        .uival = #8;)
+          where
+            (#6 group)
+            (#7 group)
+            (#8 group)
+        #pragma diagram {"xy":"H-27650;V-31675","wh":"16000;10800"} #end)
+    (#9 def o1
+    #pragma diagram {"xy":"H-25662;V-14361"} #end)
+    
+    (#10 wire #3 => #9)
+    (#11 wire #5 => #4)
+    (#12 wire #1 => #8)
+    (#13 wire #2 => #6)
+    (#14 wire #0 => #7)
+}

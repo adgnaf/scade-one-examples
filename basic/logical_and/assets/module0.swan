@@ -1,0 +1,25 @@
+-- version swan: 2025.0 graph: 2.0
+function logical_and (i0: bool;
+                      i1 : bool;)
+  returns (o0: bool;
+           o1 : bool;)
+{
+  diagram
+    (#0 def o0
+    #pragma diagram {"xy":"H-1625;V-4275"} #end)
+    (#1 expr i0
+    #pragma diagram {"xy":"H-47625;V-6175"} #end)
+    (#2 expr #3 and #4
+      where
+        (#3 group)
+        (#4 group)
+    #pragma diagram {"xy":"H-24625;V-4275"} #end)
+    (#5 expr i1
+    #pragma diagram {"xy":"H-47625;V-2375"} #end)
+    (let o1 = i0 and i1;
+    #pragma diagram {"xy":"H-40625;V4925","wh":"22000;3200"} #end)
+    
+    (#7 wire #5 => #4)
+    (#8 wire #1 => #3)
+    (#9 wire #2 => #0)
+}

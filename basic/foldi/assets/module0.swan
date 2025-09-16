@@ -1,0 +1,29 @@
+-- version swan: 2025.0 graph: 2.0
+{text%function foldiTest <<m>> (acc: 'T; arr: 'T ^m)
+      returns (o0: 'T) where 'T numeric 
+      {
+      let o0 = (foldi (
+        function (idx: int32; acc: 'T; elem: 'T) returns (o: 'T) {
+          let o = if idx > 3 then acc + elem else acc;
+        }
+      )) <<m>> (acc, arr);
+      }%text}
+
+function test ()
+  returns (o0: int32;)
+{
+  diagram
+    (#0 block foldiTest <<8>> 
+              #pragma diagram {"xy":"H700;V-9875","wh":"20000;14000"} #end)
+    (#1 expr 0
+    #pragma diagram {"xy":"H-29200;V-6375"} #end)
+    (#2 expr 2 ^ 8 
+    #pragma diagram {"xy":"H-30200;V-13375","wh":"10000;3200"} #end)
+    (#3 def o0
+    #pragma diagram {"xy":"H30200;V-9875"} #end)
+    
+    (#4 wire #2 => #0 .(2))
+    (#5 wire #1 => #0 .(1))
+    (#6 wire #0 => #3
+    #pragma diagram {"wp":"v0|#0 #3"} #end)
+}

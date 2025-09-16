@@ -1,0 +1,35 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use module0;
+
+_harness harness_projWithDefault
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::projWithDefault
+                                          #pragma diagram {"xy":"H21125;V1614","wh":"20000;14000"} #end)
+    (#1 expr (node (i: int32^3^3) returns (o: int32^3) {
+             var 
+             idx : int32 default = 0;
+             
+             let 
+             idx = 0 pre (idx+1);
+             o = (i.[idx] default [0,0,0]);
+             })([
+             [1,2,3],
+             [4,5,6],
+             [7,8,9]
+             ])
+    #pragma diagram {"xy":"H-29575;V5114","wh":"46000;22814"} #end)
+    (#2 expr (node (i: int32^3) returns (o: int32) {
+             var 
+             idx : int32 default = 0;
+             
+             let 
+             idx = 0 pre (idx+1);
+             o = (i.[idx] default 0);
+             })([1,2,3])
+    #pragma diagram {"xy":"H-27575;V-14481","wh":"42000;15376"} #end)
+    
+    (#3 wire #1 => #0 .(i0))
+    (#4 wire #2 => #0 .(idx)
+    #pragma diagram {"wp":"#2 h10350 v13261 #0"} #end)
+}

@@ -1,0 +1,37 @@
+-- version swan: 2025.0 graph: 2.0
+node mix (unlock: bool;)
+  returns (o: bool last = false;)
+{
+  diagram
+    (automaton $automaton0
+      initial state #0 Stop
+      #pragma diagram {"xy":"h-28612;v2228","wh":"12000;12000"} #end :
+      state #5 Op
+      #pragma diagram {"xy":"h11388;v2228","wh":"46447;49200"} #end :
+        diagram
+          (automaton $automaton1
+            initial state #2 state0
+            #pragma diagram {"xy":"h2223;v11000","wh":"26000;11200"} #end :
+              diagram
+                (let o = true;
+                #pragma diagram {"xy":"h0;v0","wh":"18000;3200"} #end)
+            state #4 state1
+            #pragma diagram {"xy":"h2223;v-11000","wh":"26000;11200"} #end :
+              diagram
+                (let o = false;
+                #pragma diagram {"xy":"h0;v0","wh":"18000;3200"} #end)
+            :2: #4 until 
+            restart #2
+            #pragma diagram {"tp":"h-13000;v-56|#4 h-500 h-500 h-500 h-1473 h-1473;v2947 h0;v2947 h0;v8053 h1223;v8053 h1223 h667 h667 h-13000;v-56|#2"} #end;
+            :1: #2 until 
+            restart #4
+            #pragma diagram {"tp":"h53;v-5600|#2 v-3600 v-3600 h53;v5600|#4"} #end;
+            #pragma diagram {"xy":"h0;v0","wh":"38447;41200"} #end)
+      :1: #0 unless if (unlock)
+      restart #5
+      #pragma diagram {"tp":"h6000;v-56|#0 h3592 h3592 h-23223;v-56|#5"} #end;
+      :1: #5 unless if (not unlock)
+      restart #0
+      #pragma diagram {"tp":"h-244;v-24600|#5 v-500 v-500 v-500 v-1478 h-2956;v-1478 h-2956 h-5681 h-5681 h-5681 h-11362 h-5681;v3509 v7019 v3509 v8352 h-244;v-6000|#0"} #end;
+      #pragma diagram {"xy":"H47122;V-24644","wh":"77223;61656"} #end)
+}

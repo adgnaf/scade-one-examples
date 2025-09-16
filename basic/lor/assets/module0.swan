@@ -1,0 +1,25 @@
+-- version swan: 2025.0 graph: 2.0
+function bitwise_lor (i0: uint8;
+                      i1 : uint8;)
+  returns (o0: uint8;
+           o1 : uint8;)
+{
+  diagram
+    (#0 expr i0
+    #pragma diagram {"xy":"H-38325;V-9425"} #end)
+    (let o1 = i0 lor i1;
+    #pragma diagram {"xy":"H-31325;V2775","wh":"22000;3200"} #end)
+    (#2 def o0
+    #pragma diagram {"xy":"H5675;V-7525"} #end)
+    (#3 expr i1
+    #pragma diagram {"xy":"H-38325;V-5625"} #end)
+    (#4 expr #5 lor #6
+      where
+        (#5 group)
+        (#6 group)
+    #pragma diagram {"xy":"H-16325;V-7525"} #end)
+    
+    (#7 wire #0 => #5)
+    (#8 wire #4 => #2)
+    (#9 wire #3 => #6)
+}

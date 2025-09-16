@@ -1,0 +1,25 @@
+-- version swan: 2025.0 graph: 2.0
+function gt (i0: int32;
+             i1 : int32;)
+  returns (o0: bool;
+           o1 : bool;)
+{
+  diagram
+    (#0 expr #1 > #2
+      where
+        (#1 group)
+        (#2 group)
+    #pragma diagram {"xy":"H-14175;V-6450"} #end)
+    (let o1 = i0 > i1;
+    #pragma diagram {"xy":"H-29175;V2875","wh":"20000;3200"} #end)
+    (#4 expr i1
+    #pragma diagram {"xy":"H-35175;V-4550"} #end)
+    (#5 expr i0
+    #pragma diagram {"xy":"H-35175;V-8350"} #end)
+    (#6 def o0
+    #pragma diagram {"xy":"H6825;V-6450"} #end)
+    
+    (#7 wire #4 => #2)
+    (#8 wire #5 => #1)
+    (#9 wire #0 => #6)
+}

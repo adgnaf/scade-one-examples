@@ -1,0 +1,35 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use module0;
+
+_harness harness_arrConstruct
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::arrConstruct
+                                          #pragma diagram {"xy":"H38275;V-675","wh":"20000;14000"} #end)
+    (#1 expr (node (i: int32^3^3) returns (o1: int32; o2: int32; o3: int32) {
+             var
+             idx : int32 default = 0;
+             
+             let 
+             
+             idx = 0 pre (idx+1);
+             o1 = (i.[idx][0] default 0);
+             o2 = (i.[idx][1] default 0);
+             o3 = (i.[idx][2] default 0);
+             })([
+             [1,2,3],
+             [4,5,6],
+             [7,8,9]
+             ])
+    #pragma diagram {"xy":"H-41725;V-675","wh":"66000;28392"} #end)
+    (#2 group
+    #pragma diagram {"xy":"H7175;V-675","wh":"800;14000"} #end)
+    
+    (#3 wire #1 => #2)
+    (#4 wire #2 .(1) => #0 .(i0)
+    #pragma diagram {"wp":"v4000|#2 #0"} #end)
+    (#5 wire #2 .(2) => #0 .(i1)
+    #pragma diagram {"wp":"v0|#2 #0"} #end)
+    (#6 wire #2 .(3) => #0 .(i2)
+    #pragma diagram {"wp":"v-4000|#2 #0"} #end)
+}

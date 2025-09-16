@@ -1,0 +1,20 @@
+-- version swan: 2025.0 graph: 2.0
+function flat (i0: int32^2^3;)
+  returns (o0: int32^6;
+           o1 : int32^6;)
+{
+  diagram
+    (#0 def o0
+    #pragma diagram {"xy":"H33000;V-7025"} #end)
+    (let o1 = flatten(i0);
+    #pragma diagram {"xy":"H1825;V3300","wh":"24000;3200"} #end)
+    (#2 expr flatten (#3)
+      where
+        (#3 group)
+    #pragma diagram {"xy":"H11000;V-7025"} #end)
+    (#4 expr i0
+    #pragma diagram {"xy":"H-11000;V-7025"} #end)
+    
+    (#5 wire #4 => #3)
+    (#6 wire #2 => #0)
+}

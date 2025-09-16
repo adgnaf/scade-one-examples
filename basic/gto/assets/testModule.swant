@@ -1,0 +1,23 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use module0;
+
+_harness harness_gto
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::gto
+                                          #pragma diagram {"xy":"H18500;V-6200","wh":"20000;14000"} #end)
+    (#1 expr 0
+    #pragma diagram {"xy":"H-12300;V-800"} #end)
+    (#2 expr (node (i: int32^3) returns (o: int32) {
+             var
+             idx: int32 default = 0;
+             
+             let
+             o = (i.[idx] default 0);
+             idx = 0 pre (idx+1);
+             })([-1,0,1])
+    #pragma diagram {"xy":"H-29300;V-10588","wh":"42000;15376"} #end)
+    
+    (#3 wire #2 => #0 .(i0))
+    (#4 wire #1 => #0 .(i1))
+}

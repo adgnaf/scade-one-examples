@@ -1,0 +1,25 @@
+-- version swan: 2025.0 graph: 2.0
+function structProjection ()
+  returns (o0: uint8;
+           o1 : uint8;)
+{
+  diagram
+    (#0 expr ({bval: true, uival : 42} : T).uival 
+    #pragma diagram {"xy":"H-78500;V-12775","wh":"40000;3200"} #end)
+    (#1 expr #2 . uival
+      where
+        (#2 group)
+    #pragma diagram {"xy":"H-57925;V-22525","wh":"14000;7000"} #end)
+    (#3 def o1
+    #pragma diagram {"xy":"H-51550;V-12775"} #end)
+    (#4 expr {bval: true, uival: 42} : T
+    #pragma diagram {"xy":"H-83500;V-22525","wh":"30000;3200"} #end)
+    (#5 def o0
+    #pragma diagram {"xy":"H-42025;V-22525"} #end)
+    
+    (#6 wire #4 => #2)
+    (#7 wire #1 => #5)
+    (#8 wire #0 => #3)
+}
+
+type T = {bval:bool, uival: uint8};

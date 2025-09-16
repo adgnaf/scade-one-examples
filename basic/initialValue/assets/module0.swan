@@ -1,0 +1,24 @@
+-- version swan: 2025.0 graph: 2.0
+node initialValue (i0: int32;)
+  returns (o0: int32;
+           o1 : int32;)
+{
+  diagram
+    (#0 expr #1 -> #2
+      where
+        (#1 group)
+        (#2 group)
+    #pragma diagram {"xy":"H-29325;V-11225"} #end)
+    (#3 expr i0
+    #pragma diagram {"xy":"H-50325;V-9325"} #end)
+    (#4 def o0
+    #pragma diagram {"xy":"H-8325;V-11225"} #end)
+    (#5 expr 0
+    #pragma diagram {"xy":"H-50325;V-13125"} #end)
+    (let o1 = 0 -> i0;
+    #pragma diagram {"xy":"H-44325;V-1750","wh":"20000;3200"} #end)
+    
+    (#7 wire #3 => #2)
+    (#8 wire #0 => #4)
+    (#9 wire #5 => #1)
+}

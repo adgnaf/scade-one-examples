@@ -1,0 +1,25 @@
+-- version swan: 2025.0 graph: 2.0
+function projWithDefault (i0: int32^3;
+                          idx : int32;)
+  returns (o0: int32;
+           o1 : int32;)
+{
+  diagram
+    (#0 def o0
+    #pragma diagram {"xy":"H3450;V-8850"} #end)
+    (let o1 = (i0.[idx] default 0);
+    #pragma diagram {"xy":"H-37550;V1675","wh":"34000;3200"} #end)
+    (#2 expr idx
+    #pragma diagram {"xy":"H-50550;V-6950"} #end)
+    (#3 expr i0
+    #pragma diagram {"xy":"H-50550;V-10750"} #end)
+    (#4 expr (#5 .[#6] default 0)
+      where
+        (#5 group)
+        (#6 group)
+    #pragma diagram {"xy":"H-23550;V-8850","wh":"22000;7000"} #end)
+    
+    (#7 wire #3 => #5)
+    (#8 wire #4 => #0)
+    (#9 wire #2 => #6)
+}

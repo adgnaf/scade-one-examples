@@ -1,0 +1,62 @@
+-- version swan: 2025.0 graph: 2.0
+{text%node Integral (epsilon: float64) returns (integral: float64)
+          integral = (0.0 pre integral) + T_CYCLE * epsilon; %text}
+
+const T_CYCLE: float64 = 0.05;
+
+sensor kp: float64;
+
+sensor ki: float64;
+
+node PIG (target: float64;
+          current : float64;)
+  returns (m: float64;)
+{
+  diagram
+    (#0 expr #1 - #2
+      where
+        (#1 group)
+        (#2 group)
+    #pragma diagram {"xy":"H-33750;V7100"} #end)
+    (#3 expr target
+    #pragma diagram {"xy":"H-55750;V5200","wh":"10000;3200"} #end)
+    (#4 expr current
+    #pragma diagram {"xy":"H-56750;V9000","wh":"12000;3200"} #end)
+    (#5 block Integral
+              #pragma diagram {"xy":"H-3250;V7100","wh":"20000;14000"} #end)
+    (#6 expr #7 * #8
+      where
+        (#7 group)
+        (#8 group)
+    #pragma diagram {"xy":"H27250;V9000"} #end)
+    (#9 expr #10 * #11
+      where
+        (#10 group)
+        (#11 group)
+    #pragma diagram {"xy":"H1750;V-3900"} #end)
+    (#12 expr kp
+    #pragma diagram {"xy":"H-14850;V-2000"} #end)
+    (#13 expr ki
+    #pragma diagram {"xy":"H2750;V16200"} #end)
+    (#14 expr #15 + #16
+      where
+        (#15 group)
+        (#16 group)
+    #pragma diagram {"xy":"H49250;V-2000"} #end)
+    (#17 def m
+    #pragma diagram {"xy":"H70250;V-2000"} #end)
+    
+    (#18 wire #3 => #1)
+    (#19 wire #4 => #2)
+    (#20 wire #0 => #5, #10
+    #pragma diagram {"wp":"#0 h9250[#5, v-12900 #10]"} #end)
+    (#21 wire #12 => #11)
+    (#22 wire #5 => #7
+    #pragma diagram {"wp":"v0|#5 #7"} #end)
+    (#23 wire #13 => #8
+    #pragma diagram {"wp":"#13 h9250 v-5300 #8"} #end)
+    (#24 wire #14 => #17)
+    (#25 wire #9 => #15)
+    (#26 wire #6 => #16
+    #pragma diagram {"wp":"#6 h7500 v-9100 #16"} #end)
+}

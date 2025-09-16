@@ -1,0 +1,25 @@
+-- version swan: 2025.0 graph: 2.0
+function bitwise_lsl (i0: uint8;
+                      i1 : uint8;)
+  returns (o0: uint8;
+           o1 : uint8;)
+{
+  diagram
+    (#0 expr i1
+    #pragma diagram {"xy":"H-34800;V0"} #end)
+    (#1 def o0
+    #pragma diagram {"xy":"H9200;V-1900"} #end)
+    (#2 expr #3 lsl #4
+      where
+        (#3 group)
+        (#4 group)
+    #pragma diagram {"xy":"H-12800;V-1900"} #end)
+    (#5 expr i0
+    #pragma diagram {"xy":"H-34800;V-3800"} #end)
+    (let o1 = i0 lsl i1;
+    #pragma diagram {"xy":"H-27800;V8250","wh":"22000;3200"} #end)
+    
+    (#7 wire #0 => #4)
+    (#8 wire #5 => #3)
+    (#9 wire #2 => #1)
+}

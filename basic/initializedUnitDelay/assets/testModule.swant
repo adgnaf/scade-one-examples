@@ -1,0 +1,20 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use module0;
+
+_harness harness_initializedUnitDelay
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::initializedUnitDelay
+                                          #pragma diagram {"xy":"H29625;V-1888","wh":"20000;14000"} #end)
+    (#1 expr (node (i: int32^8) returns (o: int32) {
+             var
+             idx : int32 default = 0;
+             
+             let
+             o = (i.[idx] default 0);
+             idx = 0 pre (idx + 1);
+             })([2,3,5,7,11,13,17,19])
+    #pragma diagram {"xy":"H-16875;V-1888","wh":"42000;15376"} #end)
+    
+    (#2 wire #1 => #0)
+}

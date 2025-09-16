@@ -1,0 +1,35 @@
+-- version swan: 2025.0 graph: 2.0
+type T = {bval: bool, uival: uint8};
+
+function structConstructor (i0 : bool;
+                            i1 : uint8;)
+  returns (o0: T;
+           o1 : T;
+           o2 : T;)
+{
+  diagram
+    (#0 expr {#1}: T
+      where
+        (#1 group)
+    #pragma diagram {"xy":"H-32275;V-12250","wh":"10000;10000"} #end)
+    (#2 def o0
+    #pragma diagram {"xy":"H-11275;V-12250"} #end)
+    (#3 def o2
+    #pragma diagram {"xy":"H-27188;V7050"} #end)
+    (#4 expr {i0, i1} : T
+    #pragma diagram {"xy":"H-56275;V-2375","wh":"16000;3200"} #end)
+    (#5 expr {bval: true, uival: 42} : T
+    #pragma diagram {"xy":"H-58188;V7050","wh":"30000;3200"} #end)
+    (#6 def o1
+    #pragma diagram {"xy":"H-32275;V-2375"} #end)
+    (#7 expr i0
+    #pragma diagram {"xy":"H-60775;V-9750"} #end)
+    (#8 expr i1
+    #pragma diagram {"xy":"H-60775;V-14750"} #end)
+    
+    (#9 wire #7 => #1 .(bval))
+    (#10 wire #4 => #6)
+    (#11 wire #8 => #1 .(uival))
+    (#12 wire #5 => #3)
+    (#13 wire #0 => #2)
+}

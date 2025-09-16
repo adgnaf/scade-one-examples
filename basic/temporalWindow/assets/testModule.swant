@@ -1,0 +1,20 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use module0;
+
+_harness harness_temporalWindow
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::temporalWindow
+                                          #pragma diagram {"xy":"H22850;V-1275","wh":"20000;14000"} #end)
+    (#1 expr (node () returns (o: int32) {
+             var
+             idx : int32 default = 1;
+             
+             let 
+             idx = 1 pre (idx + 1);
+             o = idx;
+             })()
+    #pragma diagram {"xy":"H-18650;V-1275","wh":"32000;15376"} #end)
+    
+    (#2 wire #1 => #0)
+}

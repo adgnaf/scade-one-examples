@@ -1,0 +1,39 @@
+-- version swan: 2025.0 graph: 2.0
+{text%function mapfoldTest <<m>> (acc: 'T; arr1: 'T ^m; arr2: 'T ^m)
+      returns (o_acc: 'T; o_arr: 'T ^m) where 'T numeric 
+      {
+      let o_acc, o_arr = (mapfold (
+          function (acc: 'T; elem1: 'T; elem2: 'T) returns (o_acc: 'T; elem: 'T) {
+            let
+            o_acc = if elem1 + elem2 > acc then elem1 + elem2 else acc;
+            elem = elem1 + elem2;
+          }
+      )) <<m>> (acc, arr1, arr2);
+      }%text}
+
+function test ()
+  returns (o0: int32;
+           o1 : int32^4;)
+{
+  diagram
+    (#0 block mapfoldTest <<4>> 
+              #pragma diagram {"xy":"H18625;V-3275","wh":"20000;14000"} #end)
+    (#1 expr 0
+    #pragma diagram {"xy":"H-11275;V1392"} #end)
+    (#2 expr [1,3,5,7]
+    #pragma diagram {"xy":"H-14275;V-7942","wh":"14000;3200"} #end)
+    (#3 expr [1,1,7,2]
+    #pragma diagram {"xy":"H-14275;V-3275","wh":"14000;3200"} #end)
+    (#4 def o0
+    #pragma diagram {"xy":"H48525;V-6775"} #end)
+    (#5 def o1
+    #pragma diagram {"xy":"H48525;V225"} #end)
+    
+    (#6 wire #1 => #0 .(1))
+    (#7 wire #2 => #0 .(2))
+    (#8 wire #3 => #0 .(3))
+    (#9 wire #0 .(1) => #4
+    #pragma diagram {"wp":"v-3500|#0 #4"} #end)
+    (#10 wire #0 .(2) => #5
+    #pragma diagram {"wp":"v3500|#0 #5"} #end)
+}

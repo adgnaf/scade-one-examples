@@ -1,0 +1,29 @@
+-- version swan: 2025.0 graph: 2.0
+{text%function foldTest <<m>> (acc: 'T; arr: 'T ^m)
+      returns (o0: 'T) where 'T numeric 
+      {
+      let o0 = (fold (
+          function (acc: 'T; elem: 'T) returns (o: 'T) {
+              let o = acc + elem;
+          }
+      )) <<m>> (acc, arr);
+      }%text}
+
+function test ()
+  returns (o0: int32;)
+{
+  diagram
+    (#0 block foldTest <<3>> 
+              #pragma diagram {"xy":"H2450;V-10750","wh":"20000;14000"} #end)
+    (#1 expr 0
+    #pragma diagram {"xy":"H-27450;V-7250"} #end)
+    (#2 expr 2 ^ 3
+    #pragma diagram {"xy":"H-28450;V-14250","wh":"10000;3200"} #end)
+    (#3 def o0
+    #pragma diagram {"xy":"H31950;V-10750"} #end)
+    
+    (#4 wire #1 => #0 .(1))
+    (#5 wire #2 => #0 .(2))
+    (#6 wire #0 => #3
+    #pragma diagram {"wp":"v0|#0 #3"} #end)
+}

@@ -1,0 +1,25 @@
+-- version swan: 2025.0 graph: 2.0
+function equal (i0: int32;
+                i1 : int32;)
+  returns (o0: bool;
+           o1 : bool;)
+{
+  diagram
+    (#0 expr #1 = #2
+      where
+        (#1 group)
+        (#2 group)
+    #pragma diagram {"xy":"H-8900;V-3875"} #end)
+    (#3 expr i0
+    #pragma diagram {"xy":"H-29900;V-5775"} #end)
+    (#4 expr i1
+    #pragma diagram {"xy":"H-29900;V-1975"} #end)
+    (#5 def o0
+    #pragma diagram {"xy":"H12100;V-3875"} #end)
+    (let o1 = i0 = i1;
+    #pragma diagram {"xy":"H-23900;V5525","wh":"20000;3200"} #end)
+    
+    (#7 wire #3 => #1)
+    (#8 wire #4 => #2)
+    (#9 wire #0 => #5)
+}

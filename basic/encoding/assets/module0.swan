@@ -1,0 +1,274 @@
+-- version swan: 2025.0 graph: 2.0
+type Coord2D = int16^2;
+
+type AlarmType = {systemID:int16, level:int8};
+
+type Message = Position {Coord2D} 
+| Alarm {AlarmType};
+
+type EncodedMessage = uint8^5;
+
+function PositionEncoding (c: Coord2D;)
+  returns (msg: EncodedMessage;)
+{
+  diagram
+    (#0 expr [#1, #2, #3]
+      where
+        (#1 group)
+        (#2 group)
+        (#3 group)
+    #pragma diagram {"xy":"H9050;V5000"} #end)
+    (#4 expr 1
+    #pragma diagram {"xy":"H-14950;V1200"} #end)
+    (#5 block Int16To2Uint8
+              #pragma diagram {"xy":"H-48450;V5000","wh":"20000;14000"} #end)
+    (#6 block Int16To2Uint8
+              #pragma diagram {"xy":"H-48450;V19500","wh":"20000;14000"} #end)
+    (#7 expr c[0]
+    #pragma diagram {"xy":"H-77950;V5000"} #end)
+    (#8 expr c[1]
+    #pragma diagram {"xy":"H-77950;V19500"} #end)
+    (#9 group bypos
+    #pragma diagram {"xy":"H-16950;V5000"} #end)
+    (#10 group bypos
+    #pragma diagram {"xy":"H-16950;V19500"} #end)
+    (#11 def msg
+    #pragma diagram {"xy":"H33050;V5000"} #end)
+    
+    (#12 wire #4 => #1)
+    (#13 wire #8 => #6)
+    (#14 wire #7 => #5)
+    (#15 wire #5 => #9
+    #pragma diagram {"wp":"v0|#5 #9"} #end)
+    (#16 wire #6 => #10
+    #pragma diagram {"wp":"v0|#6 #10"} #end)
+    (#17 wire #9 => #2)
+    (#18 wire #10 => #3
+    #pragma diagram {"wp":"#10 h7500 v-10700 #3"} #end)
+    (#19 wire #0 => #11)
+}
+
+function Int16To2Uint8 (in: int16;)
+  returns (msb: uint8;
+           lsb : uint8;)
+{
+  diagram
+    (#0 expr #1 / #2
+      where
+        (#1 group)
+        (#2 group)
+    #pragma diagram {"xy":"H-750;V-9800"} #end)
+    (#3 expr #4 mod #5
+      where
+        (#4 group)
+        (#5 group)
+    #pragma diagram {"xy":"H-750;V4900"} #end)
+    (#6 expr in
+    #pragma diagram {"xy":"H-24950;V-7900"} #end)
+    (#7 expr 256
+    #pragma diagram {"xy":"H-34350;V2700"} #end)
+    (#8 expr (#9 :> uint8)
+      where
+        (#9 group)
+    #pragma diagram {"xy":"H19600;V-9800","wh":"14000;7000"} #end)
+    (#10 expr (#11 :> uint8)
+      where
+        (#11 group)
+    #pragma diagram {"xy":"H19600;V4900","wh":"14000;7000"} #end)
+    (#12 def msb
+    #pragma diagram {"xy":"H36000;V-9800"} #end)
+    (#13 def lsb
+    #pragma diagram {"xy":"H37950;V4900"} #end)
+    
+    (#14 wire #6 => #1, #4
+    #pragma diagram {"wp":"#6 h6900[h6800 v-3800 #1, v10900 #4]"} #end)
+    (#15 wire #7 => #2, #5
+    #pragma diagram {"wp":"#7 h7767 v4100 h11933[v-14700 #2, #5]"} #end)
+    (#16 wire #0 => #9)
+    (#17 wire #8 => #12)
+    (#18 wire #3 => #11)
+    (#19 wire #10 => #13)
+}
+
+function Encoding (msg: Message;)
+  returns (code: EncodedMessage;)
+{
+  diagram
+    (activate $EncodingMessage when msg match
+      | Position {x} :
+        {
+          diagram
+            (#0 block PositionEncoding
+                      #pragma diagram {"xy":"h0;v0","wh":"20000;14000"} #end)
+            (#1 def code
+            #pragma diagram {"xy":"h29500;v0"} #end)
+            (#2 expr x
+            #pragma diagram {"xy":"h-29500;v0"} #end)
+            
+            (#3 wire #0 => #1
+            #pragma diagram {"wp":"v0|#0 #1"} #end)
+            (#4 wire #2 => #0)
+        #pragma diagram {"xy":"h0;v-7900","wh":"71000;18000"} #end
+        }
+      | Alarm {x} :
+        {
+          diagram
+            (#5 expr x
+            #pragma diagram {"xy":"h-29500;v0"} #end)
+            (#6 block AlarmEncoding
+                      #pragma diagram {"xy":"h0;v0","wh":"20000;14000"} #end)
+            (#7 def code
+            #pragma diagram {"xy":"h29500;v0"} #end)
+            
+            (#8 wire #5 => #6)
+            (#9 wire #6 => #7
+            #pragma diagram {"wp":"v0|#6 #7"} #end)
+        #pragma diagram {"xy":"h0;v14300","wh":"71000;18000"} #end
+        }
+      #pragma diagram {"xy":"H-65325;V-34700","wh":"74000;49600"} #end)
+}
+
+function AlarmEncoding (a: AlarmType;)
+  returns (msg: EncodedMessage;)
+{
+  diagram
+    (#0 block Int16To2Uint8
+              #pragma diagram {"xy":"H-53150;V-23000","wh":"20000;14000"} #end)
+    (#1 expr a.systemID
+    #pragma diagram {"xy":"H-85650;V-23000","wh":"14000;3200"} #end)
+    (#2 expr 2
+    #pragma diagram {"xy":"H-19650;V-19600"} #end)
+    (#3 expr (a.level :> uint8)
+    #pragma diagram {"xy":"H-79650;V-12000","wh":"22000;3200"} #end)
+    (#4 expr [#5, #6, #7, #8]
+      where
+        (#5 group)
+        (#6 group)
+        (#7 group)
+        (#8 group)
+    #pragma diagram {"xy":"H4350;V-13900"} #end)
+    (#9 group bypos
+    #pragma diagram {"xy":"H-21650;V-15900"} #end)
+    (#10 group bypos
+    #pragma diagram {"xy":"H-21650;V-12000"} #end)
+    (#11 def msg
+    #pragma diagram {"xy":"H28350;V-13900"} #end)
+    (#12 expr 0
+    #pragma diagram {"xy":"H-47150;V-6400"} #end)
+    (#13 group bypos
+    #pragma diagram {"xy":"H-21650;V-6400"} #end)
+    
+    (#14 wire #1 => #0)
+    (#15 wire #2 => #5)
+    (#16 wire #0 => #9
+    #pragma diagram {"wp":"v0|#0 h7750 v7100 #9"} #end)
+    (#17 wire #9 => #6
+    #pragma diagram {"wp":"#9 h7500 v100 #6"} #end)
+    (#18 wire #3 => #10)
+    (#19 wire #10 => #7)
+    (#20 wire #4 => #11)
+    (#21 wire #12 => #13)
+    (#22 wire #13 => #8
+    #pragma diagram {"wp":"#13 h7500 v-1800 #8"} #end)
+}
+
+const NC: int8 = 0;
+
+function Decoding (code: EncodedMessage;)
+  returns (msg: Message;)
+{
+  diagram
+    (activate $DecodingMsg
+      if code[0] = 1
+      then
+        {
+          diagram
+            (#5 block PositionDecoding
+                      #pragma diagram {"xy":"h0;v0","wh":"20000;14000"} #end)
+            (#6 expr code
+            #pragma diagram {"xy":"h-29500;v0"} #end)
+            (#7 def msg
+            #pragma diagram {"xy":"h29500;v0"} #end)
+            
+            (#8 wire #6 => #5)
+            (#9 wire #5 => #7
+            #pragma diagram {"wp":"v0|#5 #7"} #end)
+        #pragma diagram {"xy":"h0;v-9500","wh":"71000;18000"} #end
+        }
+      else
+        {
+          diagram
+            (#0 block AlarmDecoding
+                      #pragma diagram {"xy":"h0;v0","wh":"20000;14000"} #end)
+            (#1 expr code
+            #pragma diagram {"xy":"h-29500;v0"} #end)
+            (#2 def msg
+            #pragma diagram {"xy":"h29500;v0"} #end)
+            
+            (#3 wire #1 => #0)
+            (#4 wire #0 => #2
+            #pragma diagram {"wp":"v0|#0 #2"} #end)
+        #pragma diagram {"xy":"h0;v12700","wh":"71000;18000"} #end
+        }
+    #pragma diagram {"xy":"H-40000;V-25950","wh":"74000;46400"} #end)
+}
+
+function AlarmDecoding (code: EncodedMessage;)
+  returns (alarm: Message;)
+{
+  diagram
+    (#0 expr (code[1] :>int16) * 256 + (code[2] :> int16)
+    #pragma diagram {"xy":"H-73950;V-39300","wh":"48000;3200"} #end)
+    (#1 expr (code[3] :> int8)
+    #pragma diagram {"xy":"H-51950;V-44300","wh":"20000;3200"} #end)
+    (#2 def alarm
+    #pragma diagram {"xy":"H13250;V-41800","wh":"10000;3200"} #end)
+    (#3 expr Alarm {#4}
+      where
+        (#4 group)
+    #pragma diagram {"xy":"H-11750;V-41800","wh":"16000;10000"} #end)
+    
+    (#5 wire #0 => #4 .(systemID))
+    (#6 wire #1 => #4 .(level))
+    (#7 wire #3 => #2)
+}
+
+function PositionDecoding (code: EncodedMessage;)
+  returns (pos: Message;)
+{
+  diagram
+    (#0 expr Position {#1}
+      where
+        (#1 group)
+    #pragma diagram {"xy":"H14550;V-29600","wh":"18000;10000"} #end)
+    (#2 expr (code[1]:> int16) * 256 + (code[2]:> int16)
+    #pragma diagram {"xy":"H-60950;V-31500","wh":"46000;3200"} #end)
+    (#3 expr (code[3]:>int16) * 256 + (code[4]:>int16)
+    #pragma diagram {"xy":"H-59950;V-27700","wh":"44000;3200"} #end)
+    (#4 expr [#5, #6]
+      where
+        (#5 group)
+        (#6 group)
+    #pragma diagram {"xy":"H-17950;V-29600"} #end)
+    (#7 def pos
+    #pragma diagram {"xy":"H39550;V-29600"} #end)
+    
+    (#8 wire #2 => #5)
+    (#9 wire #3 => #6)
+    (#10 wire #4 => #1)
+    (#11 wire #0 => #7)
+}
+
+{text%function variantTypeArr ()
+      returns (o_arr: Message^5)
+      {
+      let
+      o_arr = [
+          (Position {[1,2]}),
+          (Alarm  {systemID: 1, level: 2}),
+          (Position {[3,4]}),
+          (Alarm {systemID: 3, level: 4}),
+          (Position {[42, 24]})
+          ];
+      
+      }%text}

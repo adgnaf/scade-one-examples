@@ -1,0 +1,26 @@
+-- version swan: 2025.0 graph: 2.0
+function ifThenElseTest (i0: bool;)
+  returns (o0: bool;)
+{
+  diagram
+    (#0 expr true
+    #pragma diagram {"xy":"H-17750;V-5525"} #end)
+    (#1 expr i0
+    #pragma diagram {"xy":"H-17750;V-10125"} #end)
+    (#2 expr if #3 then #4 else #5
+      where
+        (#3 group)
+        (#4 group)
+        (#5 group)
+    #pragma diagram {"xy":"H3250;V-3625"} #end)
+    (#6 expr false
+    #pragma diagram {"xy":"H-18750;V-1725","wh":"10000;3200"} #end)
+    (#7 def o0
+    #pragma diagram {"xy":"H24250;V-3625"} #end)
+    
+    (#8 wire #2 => #7)
+    (#9 wire #6 => #5)
+    (#10 wire #0 => #4)
+    (#11 wire #1 => #3
+    #pragma diagram {"wp":"#1 h18500 #3"} #end)
+}

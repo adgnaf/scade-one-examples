@@ -1,0 +1,21 @@
+-- version swan: 2025.0 graph: 2.0
+node automatonSt ()
+  returns (o0: int32;)
+{
+  diagram
+    (automaton $automaton0
+      initial state #1 state0
+      #pragma diagram {"xy":"h0;v0","wh":"24000;11200"} #end :
+        diagram
+          (let o0 = 42;
+          #pragma diagram {"xy":"h0;v0","wh":"16000;3200"} #end)
+      #pragma diagram {"xy":"H-5025;V1200","wh":"32000;20000"} #end)
+}
+
+{text%node automatonStTextual () returns (o0: int32) 
+      {
+      let o0: automaton 
+          initial state state0:
+          let o0 = 42;
+      ;
+      }%text}

@@ -1,0 +1,57 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use module0;
+
+_harness harness_Decoding
+{
+  diagram
+    (#0 block module0::Decoding
+              #pragma diagram {"xy":"H-6700;V-5200","wh":"20000;14000"} #end)
+    (#1 expr (node (i: uint8^5^4) returns (o: uint8^5) {
+             var
+             idx : int32 default = 0;
+             
+             
+             let 
+             idx = 0 pre (idx +1);
+             o = (i.[idx] default [0,0,0,0,0]);
+             })([
+             [1,3,5,7,11],
+             [0,1,2,3,0],
+             [1,2,3,4,5],
+             [0,2,3,4,0]
+             ])
+    #pragma diagram {"xy":"H-55200;V-5200","wh":"46000;26533"} #end)
+    
+    (#2 wire #1 => #0)
+}
+
+_harness harness_variantTypeArr
+{
+  diagram
+    (#0 block module0::variantTypeArr
+              #pragma diagram {"xy":"H0;V0","wh":"20000;14000"} #end)
+}
+
+_harness harness_Encoding
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::Encoding
+                                          #pragma diagram {"xy":"H10000;V3666","wh":"20000;14000"} #end)
+    (#1 expr (node (i: module0::Message^3) returns (o: module0::Message) {
+             var 
+             idx : int32 default = 0;
+             
+             let 
+             idx = 0 pre (idx + 1);
+             o = (i.[idx] default (module0::Position {[0,0]}));
+             
+             
+             })([
+             (module0::Position {[1,2]}),
+             (module0::Alarm {systemID:1, level:2}),
+             (module0::Position {[3,4]})
+             ])
+    #pragma diagram {"xy":"H-46500;V3666","wh":"62000;26533"} #end)
+    
+    (#2 wire #1 => #0)
+}

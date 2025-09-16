@@ -1,0 +1,25 @@
+-- version swan: 2025.0 graph: 2.0
+function bitwise_lxor (i0: uint8;
+                       i1 : uint8;)
+  returns (o0: uint8;
+           o1 : uint8;)
+{
+  diagram
+    (let o1 = i0 lxor i1;
+    #pragma diagram {"xy":"H-33000;V-2175","wh":"24000;3200"} #end)
+    (#1 expr i0
+    #pragma diagram {"xy":"H-41000;V-15550"} #end)
+    (#2 expr i1
+    #pragma diagram {"xy":"H-41000;V-11750"} #end)
+    (#3 def o0
+    #pragma diagram {"xy":"H3000;V-13650"} #end)
+    (#4 expr #5 lxor #6
+      where
+        (#5 group)
+        (#6 group)
+    #pragma diagram {"xy":"H-19000;V-13650"} #end)
+    
+    (#7 wire #4 => #3)
+    (#8 wire #2 => #6)
+    (#9 wire #1 => #5)
+}

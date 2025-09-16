@@ -1,0 +1,25 @@
+-- version swan: 2025.0 graph: 2.0
+function append (i0: int32^2;
+                 i1 : int32^3;)
+  returns (o0: int32^5;
+           o1 : int32^5;)
+{
+  diagram
+    (let o1 = i0 @ i1;
+    #pragma diagram {"xy":"H-4725;V-8300","wh":"20000;3200"} #end)
+    (#1 def o0
+    #pragma diagram {"xy":"H25650;V-18462"} #end)
+    (#2 expr i1
+    #pragma diagram {"xy":"H-16350;V-16562"} #end)
+    (#3 expr i0
+    #pragma diagram {"xy":"H-16350;V-20362"} #end)
+    (#4 expr #5 @ #6
+      where
+        (#5 group)
+        (#6 group)
+    #pragma diagram {"xy":"H4650;V-18462"} #end)
+    
+    (#7 wire #3 => #5)
+    (#8 wire #2 => #6)
+    (#9 wire #4 => #1)
+}

@@ -1,0 +1,13 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use module0;
+
+_harness harness_slice
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::slice
+                                          #pragma diagram {"xy":"H32000;V-850","wh":"20000;14000"} #end)
+    (#1 expr [2,3,5,7,11,13,17,19]
+    #pragma diagram {"xy":"H-5500;V-850","wh":"24000;3200"} #end)
+    
+    (#2 wire #1 => #0)
+}

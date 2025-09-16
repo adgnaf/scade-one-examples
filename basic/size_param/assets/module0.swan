@@ -1,0 +1,18 @@
+-- version swan: 2025.0 graph: 2.0
+{text%function dotProd <<m>> (arr1: int32 ^m; arr2: int32 ^m)
+      returns (o0: int32)
+      {
+      let 
+      o0 = forward <<m>> with [a1] = arr1; [a2] = arr2;
+              let s = last 's + a1 * a2;
+          returns (s: last = 0);
+      }%text}
+
+{text%function test ()
+      returns (o0: int32; o1: int32; o2: int32)
+      {
+      let 
+      o0 = dotProd <<2>> ([1,2], [3,4]);
+      o1 = dotProd <<4>> (1^4, 2^4);
+      o2 = dotProd <<8>> (1^8, 2^8);
+      }%text}

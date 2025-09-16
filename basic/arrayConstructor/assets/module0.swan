@@ -1,0 +1,30 @@
+-- version swan: 2025.0 graph: 2.0
+function arrConstruct (i0: int32;
+                       i1 : int32;
+                       i2 : int32;)
+  returns (o0: int32^3;
+           o1 : int32^3;)
+{
+  diagram
+    (#0 expr [#1, #2, #3]
+      where
+        (#1 group)
+        (#2 group)
+        (#3 group)
+    #pragma diagram {"xy":"H9725;V10000"} #end)
+    (#4 def o0
+    #pragma diagram {"xy":"H33725;V10000"} #end)
+    (#5 expr i0
+    #pragma diagram {"xy":"H-14275;V6200"} #end)
+    (let o1 = [i0, i1, i2];
+    #pragma diagram {"xy":"H-5275;V23575","wh":"26000;3200"} #end)
+    (#7 expr i1
+    #pragma diagram {"xy":"H-14275;V10000"} #end)
+    (#8 expr i2
+    #pragma diagram {"xy":"H-14275;V13800"} #end)
+    
+    (#9 wire #7 => #2)
+    (#10 wire #0 => #4)
+    (#11 wire #8 => #3)
+    (#12 wire #5 => #1)
+}

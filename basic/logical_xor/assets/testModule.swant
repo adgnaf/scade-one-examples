@@ -1,0 +1,32 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use module0;
+
+_harness harness_logical_xor
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::logical_xor
+                                          #pragma diagram {"xy":"H28325;V2075","wh":"20000;14000"} #end)
+    (#1 expr (node (i: bool^2^4) returns (o1: bool; o2: bool) {
+             var 
+             idx : int32 default = 0;
+             
+             let
+             o1 = (i.[idx][0] default false);
+             o2 = (i.[idx][1] default false);
+             idx = 0 pre (idx + 1);
+             })([
+             [true, true],
+             [false, true],
+             [true, false],
+             [false, false]
+             ])
+    #pragma diagram {"xy":"H-44675;V2075","wh":"52000;26533"} #end)
+    (#2 group
+    #pragma diagram {"xy":"H-2775;V2075","wh":"800;14000"} #end)
+    
+    (#3 wire #1 => #2)
+    (#4 wire #2 .(1) => #0 .(i0)
+    #pragma diagram {"wp":"v3000|#2 #0"} #end)
+    (#5 wire #2 .(2) => #0 .(i1)
+    #pragma diagram {"wp":"v-3000|#2 #0"} #end)
+}

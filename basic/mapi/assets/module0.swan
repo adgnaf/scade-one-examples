@@ -1,0 +1,29 @@
+-- version swan: 2025.0 graph: 2.0
+{text%function elemWiseAdd2 <<m>> (arr1: 'T ^m; arr2: 'T ^m)
+      returns (o_arr: 'T ^m) where 'T numeric
+      {
+      let o_arr = (mapi (
+          function (idx: int32; a: 'T; b: 'T) returns (o: 'T) {
+            let o = if idx > 3 then 42 else (a + b);
+          }
+      )) <<m>> (arr1, arr2);
+      }%text}
+
+function test ()
+  returns (o0: int32^5;)
+{
+  diagram
+    (#0 block elemWiseAdd2 <<5>> 
+              #pragma diagram {"xy":"H-2425;V-5275","wh":"20000;14000"} #end)
+    (#1 expr 1^5
+    #pragma diagram {"xy":"H-32325;V-1775"} #end)
+    (#2 expr 2^5
+    #pragma diagram {"xy":"H-32325;V-8775"} #end)
+    (#3 def o0
+    #pragma diagram {"xy":"H27075;V-5275"} #end)
+    
+    (#4 wire #1 => #0 .(1))
+    (#5 wire #2 => #0 .(2))
+    (#6 wire #0 => #3
+    #pragma diagram {"wp":"v0|#0 #3"} #end)
+}

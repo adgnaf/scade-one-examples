@@ -1,0 +1,21 @@
+-- version swan: 2025.0 graph: 2.0
+function dotProd (u: int32^N;
+                  v : int32^N;)
+  returns (o0: int32;)
+{
+  diagram
+    (#0 expr forward
+      <<N>> with [ui]=u; [vi]=v;
+      diagram
+        (let sum = (last 'sum) + (ui * vi);
+        #pragma diagram {"xy":"h0;v0","wh":"36000;3200"} #end)
+      returns (sum : last = 0)
+      #pragma diagram {"xy":"H-45450;V-23925","wh":"44600;19600"} #end)
+    (#2 def o0
+    #pragma diagram {"xy":"H-3650;V-23925"} #end)
+    
+    (#3 wire #0 => #2
+    #pragma diagram {"wp":"v0|#0 #2"} #end)
+}
+
+const N: int32 = 5;

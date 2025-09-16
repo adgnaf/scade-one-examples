@@ -1,0 +1,9 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use module0;
+
+_harness harness_structDestructor
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::structDestructor
+                                          #pragma diagram {"xy":"H-43700;V-1600","wh":"20000;14000"} #end)
+}

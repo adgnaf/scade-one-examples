@@ -1,0 +1,20 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use PIController;
+
+_harness PITest
+{
+  diagram
+    (#0 block (PIController::PIG \ target: 50.0)
+              #pragma diagram {"xy":"H21150;V-7000","wh":"22800;20400"} #end)
+    (#1 def _stop_condition
+    #pragma diagram {"xy":"H6638;V-21512","wh":"20000;3200"} #end)
+    (#2 expr _current_cycle = 0
+    #pragma diagram {"xy":"H-26362;V-21512","wh":"22000;3200"} #end)
+    (#3 expr 0.03
+    #pragma diagram {"xy":"H-42500;V-12175"} #end)
+    (#4 def kp 
+    #pragma diagram {"xy":"H-27750;V-12175"} #end)
+    
+    (#5 wire #2 => #1)
+    (#6 wire #3 => #4)
+}

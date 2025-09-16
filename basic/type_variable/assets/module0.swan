@@ -1,0 +1,18 @@
+-- version swan: 2025.0 graph: 2.0
+{text%function hadamardProd <<m>> (arr1: 'T ^m; arr2: 'T ^m)
+      returns (o_arr: 'T ^m) where 'T numeric 
+      {
+      let 
+      o_arr = forward <<m>> with [a1] = arr1; [a2] = arr2;
+                let o = a1 * a2;
+              returns ([o]);
+      }%text}
+
+{text%function test ()
+      returns (o0: int32 ^2; o1: uint32 ^4; o2: float32 ^8)
+      {
+      let 
+      o0 = hadamardProd <<2>> (1^2, 2^2);
+      o1 = hadamardProd <<4>> (1^4, 2^4);
+      o2 = hadamardProd <<8>> (1.1 ^8, 2.2 ^8);
+      }%text}

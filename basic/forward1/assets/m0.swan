@@ -1,0 +1,20 @@
+-- version swan: 2025.0 graph: 2.0
+const N: int32 = 5;
+
+function forward1 (in_arr: int32^N;)
+  returns (o0: int32;)
+{
+  diagram
+    (#0 expr forward
+      <<N>> with [ai] = in_arr;
+      diagram
+        (let sum = (last 'sum) + ai;
+        #pragma diagram {"xy":"h0;v0","wh":"30000;3200"} #end)
+      returns (sum : last = 0)
+      #pragma diagram {"xy":"H-25175;V-15000","wh":"38600;19600"} #end)
+    (#2 def o0
+    #pragma diagram {"xy":"H13625;V-15000"} #end)
+    
+    (#3 wire #0 => #2
+    #pragma diagram {"wp":"v0|#0 #2"} #end)
+}

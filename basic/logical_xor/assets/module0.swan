@@ -1,0 +1,25 @@
+-- version swan: 2025.0 graph: 2.0
+function logical_xor (i0: bool;
+                      i1 : bool;)
+  returns (o0: bool;
+           o1 : bool;)
+{
+  diagram
+    (#0 expr #1 xor #2
+      where
+        (#1 group)
+        (#2 group)
+    #pragma diagram {"xy":"H-13075;V-11450"} #end)
+    (#3 expr i1
+    #pragma diagram {"xy":"H-36075;V-9550"} #end)
+    (let o1 = i0 xor i1;
+    #pragma diagram {"xy":"H-29075;V925","wh":"22000;3200"} #end)
+    (#5 expr i0
+    #pragma diagram {"xy":"H-36075;V-13350"} #end)
+    (#6 def o0
+    #pragma diagram {"xy":"H9925;V-11450"} #end)
+    
+    (#7 wire #5 => #1)
+    (#8 wire #3 => #2)
+    (#9 wire #0 => #6)
+}

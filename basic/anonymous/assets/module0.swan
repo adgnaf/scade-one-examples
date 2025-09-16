@@ -1,0 +1,42 @@
+-- version swan: 2025.0 graph: 2.0
+node ananymous ()
+  returns (o0: int32;
+           o1 : int32;
+           o2 : int32;
+           o3 : int32;)
+{
+  diagram
+    (#0 def o3
+    #pragma diagram {"xy":"H-45100;V-14211"} #end)
+    (#1 expr (function u,v => u+v)(1_i32, 2_i32)
+    #pragma diagram {"xy":"H-72825;V-41600","wh":"38000;3200"} #end)
+    (#2 expr 1_i32
+    #pragma diagram {"xy":"H-88425;V-51125","wh":"10000;3200"} #end)
+    (#3 block ({op_expr%function u,v => u + v%op_expr})
+              #pragma diagram {"xy":"H-57525;V-54625","wh":"20000;14000"} #end)
+    (#4 block ({op_expr%node() returns (o: int32) {
+                        let o = 0 pre (o+1);
+                        }%op_expr})
+              #pragma diagram {"xy":"H-78925;V-29600","wh":"28650;14000"} #end)
+    (#5 def o0
+    #pragma diagram {"xy":"H-28025;V-54625"} #end)
+    (#6 def o1
+    #pragma diagram {"xy":"H-45100;V-41600"} #end)
+    (#7 expr 2_i32
+    #pragma diagram {"xy":"H-88425;V-58125","wh":"10000;3200"} #end)
+    (#8 def o2
+    #pragma diagram {"xy":"H-45100;V-29600"} #end)
+    (#9 expr (node () returns (o: int32) {
+             let o = 0 pre (o+1);
+             })()
+    #pragma diagram {"xy":"H-77225;V-14211","wh":"32000;6078"} #end)
+    
+    (#10 wire #7 => #3 .(2))
+    (#11 wire #4 => #8
+    #pragma diagram {"wp":"v0|#4 #8"} #end)
+    (#12 wire #3 => #5
+    #pragma diagram {"wp":"v0|#3 #5"} #end)
+    (#13 wire #2 => #3 .(1))
+    (#14 wire #1 => #6)
+    (#15 wire #9 => #0)
+}

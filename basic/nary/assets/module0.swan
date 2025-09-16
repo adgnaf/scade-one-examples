@@ -1,0 +1,175 @@
+-- version swan: 2025.0 graph: 2.0
+function arith ()
+  returns (o0: int32;
+           o1 : int32;
+           o2 : int32;
+           o3 : int32;)
+{
+  diagram
+    (#0 expr 3_i32
+    #pragma diagram {"xy":"H-100375;V14029","wh":"10000;3200"} #end)
+    (#1 block ({op_expr%+%op_expr})
+              #pragma diagram {"xy":"H-71875;V11696","wh":"12000;7000"} #end)
+    (#2 block ({op_expr%*%op_expr})
+              #pragma diagram {"xy":"H-72675;V3121","wh":"13600;9150"} #end)
+    (#3 expr (+)(1_i32, 2_i32, 3_i32)
+    #pragma diagram {"xy":"H-89075;V-22300","wh":"28000;3200"} #end)
+    (#4 def o3
+    #pragma diagram {"xy":"H-46375;V3121"} #end)
+    (#5 expr 1_i32
+    #pragma diagram {"xy":"H-100375;V71","wh":"10000;3200"} #end)
+    (#6 expr (*)(1_i32, 2_i32, 3_i32)
+    #pragma diagram {"xy":"H-89075;V-13925","wh":"28000;3200"} #end)
+    (#7 def o2
+    #pragma diagram {"xy":"H-46375;V11696"} #end)
+    (#8 expr 2_i32
+    #pragma diagram {"xy":"H-100375;V3771","wh":"10000;3200"} #end)
+    (#9 def o0
+    #pragma diagram {"xy":"H-59075;V-22300"} #end)
+    (#10 def o1
+    #pragma diagram {"xy":"H-59075;V-13925"} #end)
+    
+    (#11 wire #5 => #1 .(1), #2 .(1)
+    #pragma diagram {"wp":"#5 h13417[v9683 #1, #2]"} #end)
+    (#12 wire #3 => #9)
+    (#13 wire #8 => #1 .(2), #2 .(2)
+    #pragma diagram {"wp":"#8 h9450[v7100 #1, #2]"} #end)
+    (#14 wire #6 => #10)
+    (#15 wire #1 => #7
+    #pragma diagram {"wp":"v0|#1 #7"} #end)
+    (#16 wire #0 => #1 .(3), #2 .(3)
+    #pragma diagram {"wp":"#0 h5483[#1, v-8308 #2]"} #end)
+    (#17 wire #2 => #4
+    #pragma diagram {"wp":"v0|#2 #4"} #end)
+}
+
+function bitwise ()
+  returns (o0: uint8;
+           o1 : uint8;
+           o2 : uint8;
+           o3 : uint8;)
+{
+  diagram
+    (#0 expr 0b001
+    #pragma diagram {"xy":"H-80000;V-4148","wh":"10000;3200"} #end)
+    (#1 expr 0b100
+    #pragma diagram {"xy":"H-80000;V-16315","wh":"10000;3200"} #end)
+    (#2 block ({op_expr%land%op_expr})
+              #pragma diagram {"xy":"H-53100;V-6481","wh":"12000;7000"} #end)
+    (#3 def o3
+    #pragma diagram {"xy":"H-27600;V-13981"} #end)
+    (#4 expr 0b010
+    #pragma diagram {"xy":"H-80000;V-12615","wh":"10000;3200"} #end)
+    (#5 def o1
+    #pragma diagram {"xy":"H-40638;V-31350"} #end)
+    (#6 def o0
+    #pragma diagram {"xy":"H-40638;V-37175"} #end)
+    (#7 def o2
+    #pragma diagram {"xy":"H-27600;V-6481"} #end)
+    (#8 expr (land)(0b001, 0b010, 0b100)
+    #pragma diagram {"xy":"H-71638;V-37175","wh":"30000;3200"} #end)
+    (#9 block ({op_expr%lor%op_expr})
+              #pragma diagram {"xy":"H-53100;V-13981","wh":"12000;7000"} #end)
+    (#10 expr (lor)(0b001, 0b010, 0b100)
+    #pragma diagram {"xy":"H-71638;V-31350","wh":"30000;3200"} #end)
+    
+    (#11 wire #10 => #5)
+    (#12 wire #1 => #2 .(3), #9 .(1)
+    #pragma diagram {"wp":"#1 h9450[v8300 #2, #9]"} #end)
+    (#13 wire #2 => #7
+    #pragma diagram {"wp":"v0|#2 #7"} #end)
+    (#14 wire #9 => #3
+    #pragma diagram {"wp":"v0|#9 #3"} #end)
+    (#15 wire #4 => #2 .(2), #9 .(2)
+    #pragma diagram {"wp":"#4 h5483[v6534 #2, #9]"} #end)
+    (#16 wire #0 => #2 .(1), #9 .(3)
+    #pragma diagram {"wp":"#0 h13417[#2, v-7467 #9]"} #end)
+    (#17 wire #8 => #6)
+}
+
+function boolean ()
+  returns (o0: bool;
+           o1 : bool;
+           o2 : bool;
+           o3 : bool;
+           o4 : bool;
+           o5 : bool;)
+{
+  diagram
+    (#0 expr (or) (true, false, false)
+    #pragma diagram {"xy":"H-82600;V-94394","wh":"28000;3200"} #end)
+    (#1 expr true
+    #pragma diagram {"xy":"H-95950;V-60350"} #end)
+    (#2 expr true
+    #pragma diagram {"xy":"H-95950;V-71150"} #end)
+    (#3 block ({op_expr%or%op_expr})
+              #pragma diagram {"xy":"H-70050;V-70183","wh":"12000;7000"} #end)
+    (#4 def o2
+    #pragma diagram {"xy":"H-52600;V-88178"} #end)
+    (#5 expr (and)(true, true, true) 
+    #pragma diagram {"xy":"H-82600;V-100041","wh":"28000;3200"} #end)
+    (#6 def o4
+    #pragma diagram {"xy":"H-44550;V-70183"} #end)
+    (#7 def o5
+    #pragma diagram {"xy":"H-44550;V-77683"} #end)
+    (#8 def o3
+    #pragma diagram {"xy":"H-44550;V-62683"} #end)
+    (#9 def o0
+    #pragma diagram {"xy":"H-52600;V-100041"} #end)
+    (#10 expr (xor)(false, false, true)
+    #pragma diagram {"xy":"H-82600;V-88178","wh":"28000;3200"} #end)
+    (#11 expr true
+    #pragma diagram {"xy":"H-95950;V-65750"} #end)
+    (#12 block ({op_expr%and%op_expr})
+               #pragma diagram {"xy":"H-70050;V-62683","wh":"12000;7000"} #end)
+    (#13 def o1
+    #pragma diagram {"xy":"H-52600;V-94394"} #end)
+    (#14 block ({op_expr%xor%op_expr})
+               #pragma diagram {"xy":"H-70050;V-77683","wh":"12000;7000"} #end)
+    
+    (#15 wire #5 => #9)
+    (#16 wire #2 => #12 .(2), #3 .(2), #14 .(2)
+    #pragma diagram {"wp":"#2 h5483[v9000 #12, #3, v-8200 #14]"} #end)
+    (#17 wire #0 => #13)
+    (#18 wire #1 => #12 .(3), #3 .(3), #14 .(3)
+    #pragma diagram {"wp":"#1 h13417[#12, v-8027[#3, v-7640 #14]]"} #end)
+    (#19 wire #3 => #6
+    #pragma diagram {"wp":"v0|#3 #6"} #end)
+    (#20 wire #14 => #7
+    #pragma diagram {"wp":"v0|#14 #7"} #end)
+    (#21 wire #12 => #8
+    #pragma diagram {"wp":"v0|#12 #8"} #end)
+    (#22 wire #11 => #12 .(1), #3 .(1), #14 .(1)
+    #pragma diagram {"wp":"#11 h9450[v1800 #12, v-4013[#3, v-7920 #14]]"} #end)
+    (#23 wire #10 => #4)
+}
+
+function array ()
+  returns (o0: int32^14;
+           o1 : int32^14;)
+{
+  diagram
+    (#0 def o1
+    #pragma diagram {"xy":"H-1300;V-25150"} #end)
+    (#1 def o0
+    #pragma diagram {"xy":"H2675;V-11300"} #end)
+    (#2 expr 3_i32^4
+    #pragma diagram {"xy":"H-50725;V-7600","wh":"12000;3200"} #end)
+    (#3 expr (@)(2_i32^2, 3_i32^4, 4_i32^8)
+    #pragma diagram {"xy":"H-34300;V-25150","wh":"34000;3200"} #end)
+    (#4 block ({op_expr%@%op_expr})
+              #pragma diagram {"xy":"H-22825;V-11300","wh":"12000;7000"} #end)
+    (#5 expr 2_i32^2
+    #pragma diagram {"xy":"H-50725;V-15000","wh":"12000;3200"} #end)
+    (#6 expr 4_i32^8
+    #pragma diagram {"xy":"H-50725;V-11300","wh":"12000;3200"} #end)
+    
+    (#7 wire #6 => #4 .(3))
+    (#8 wire #5 => #4 .(1)
+    #pragma diagram {"wp":"#5 h6475 v2033 #4"} #end)
+    (#9 wire #4 => #1
+    #pragma diagram {"wp":"v0|#4 #1"} #end)
+    (#10 wire #3 => #0)
+    (#11 wire #2 => #4 .(2)
+    #pragma diagram {"wp":"#2 h12425 v-2033 #4"} #end)
+}

@@ -1,0 +1,20 @@
+-- version swan: 2025.0 graph: 2.0
+function bitwise_lnot (i0: uint8;)
+  returns (o0: uint8;
+           o1 : uint8;)
+{
+  diagram
+    (#0 expr lnot #1
+      where
+        (#1 group)
+    #pragma diagram {"xy":"H-15750;V-17150"} #end)
+    (let o1 = lnot i0;
+    #pragma diagram {"xy":"H-31700;V-9000","wh":"20000;3200"} #end)
+    (#3 def o0
+    #pragma diagram {"xy":"H6250;V-17150"} #end)
+    (#4 expr i0
+    #pragma diagram {"xy":"H-37750;V-17150"} #end)
+    
+    (#5 wire #4 => #1)
+    (#6 wire #0 => #3)
+}

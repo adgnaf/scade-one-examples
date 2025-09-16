@@ -1,0 +1,31 @@
+-- version swan: 2025.0 graph: 2.0
+function fu (i0: int32^8;)
+  returns (o0: int32^8;
+           o1 : int32^8;)
+{
+  diagram
+    (#0 expr 42
+    #pragma diagram {"xy":"H1250;V6850"} #end)
+    (#1 expr 24
+    #pragma diagram {"xy":"H1250;V3050"} #end)
+    (let o1 = (i0 with [1] = 24; [2] = 42);
+    #pragma diagram {"xy":"H17250;V16800","wh":"40000;3200"} #end)
+    (#3 expr
+      (#4 with
+        [1] = #5;
+        [2] = #6;)
+          where
+            (#4 group)
+            (#5 group)
+            (#6 group)
+        #pragma diagram {"xy":"H26650;V3050","wh":"16000;10800"} #end)
+    (#7 expr i0
+    #pragma diagram {"xy":"H1250;V-750"} #end)
+    (#8 def o0
+    #pragma diagram {"xy":"H49250;V1150"} #end)
+    
+    (#9 wire #1 => #5)
+    (#10 wire #3 => #8)
+    (#11 wire #7 => #4)
+    (#12 wire #0 => #6)
+}

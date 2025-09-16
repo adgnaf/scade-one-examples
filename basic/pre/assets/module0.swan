@@ -1,0 +1,22 @@
+-- version swan: 2025.0 graph: 2.0
+node preTest (i0: int32;)
+  returns (o0: int32;)
+{
+  diagram
+    (#0 expr pre #1
+      where
+        (#1 group)
+    #pragma diagram {"xy":"H-6625;V-9600"} #end)
+    (#2 expr i0
+    #pragma diagram {"xy":"H-24375;V-9600"} #end)
+    (#3 def o0
+    #pragma diagram {"xy":"H11125;V-9600"} #end)
+    
+    (#4 wire #2 => #1)
+    (#5 wire #0 => #3)
+}
+
+node operator1 (i0: int32;)
+  returns (o0: int32;)
+{
+}

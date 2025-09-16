@@ -1,0 +1,63 @@
+-- version swan: 2025.0 graph: 2.0
+function caseExpr (i0: int32;)
+  returns (o0: int32;
+           o1 : int32;)
+{
+  diagram
+    (#0 expr #1 + #2
+      where
+        (#1 group)
+        (#2 group)
+    #pragma diagram {"xy":"H-11075;V-42000"} #end)
+    (#3 expr 1
+    #pragma diagram {"xy":"H-32075;V-40100"} #end)
+    (#4 expr 2
+    #pragma diagram {"xy":"H-32075;V-24100"} #end)
+    (#5 expr 3
+    #pragma diagram {"xy":"H-32075;V-16600"} #end)
+    (#6 expr #7 + #8
+      where
+        (#7 group)
+        (#8 group)
+    #pragma diagram {"xy":"H-11075;V-26000"} #end)
+    (#9 expr i0
+    #pragma diagram {"xy":"H-32075;V-27900"} #end)
+    (#10 expr
+      (case #11 of
+        | 1 : #12
+        | 2 : #13
+        | 3 : #14
+        | default : #15)
+          where
+            (#11 group)
+            (#12 group)
+            (#13 group)
+            (#14 group)
+            (#15 group)
+        #pragma diagram {"xy":"H13925;V-26000","wh":"16000;18400"} #end)
+    (#16 def o0
+    #pragma diagram {"xy":"H37925;V-29800"} #end)
+    (#17 expr #18 + #19
+      where
+        (#18 group)
+        (#19 group)
+    #pragma diagram {"xy":"H-11075;V-18500"} #end)
+    (let o1 = (case i0 of 
+             | 1: i0 + 1
+             | 2: i0 + 2
+             | 3: i0 + 3
+             | default : i0);
+    #pragma diagram {"xy":"H-2075;V-3301","wh":"28000;9797"} #end)
+    
+    (#21 wire #3 => #2)
+    (#22 wire #6 => #13)
+    (#23 wire #0 => #12
+    #pragma diagram {"wp":"#0 h6167 v12200 #12"} #end)
+    (#24 wire #5 => #19)
+    (#25 wire #10 => #16)
+    (#26 wire #9 => #11, #1, #7, #18, #15
+    #pragma diagram {"wp":"#9 h8500[v-16000[v-1600 h25000[h10000 #11, v27100 #15], #1], #7, v7500 #18]"} #end)
+    (#27 wire #4 => #8)
+    (#28 wire #17 => #14
+    #pragma diagram {"wp":"#17 h6167 v-3700 #14"} #end)
+}

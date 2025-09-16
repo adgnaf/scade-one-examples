@@ -1,0 +1,24 @@
+-- version swan: 2025.0 graph: 2.0
+function activate_if (i0: int32;
+                      i1 : int32;)
+  returns (o0: int32;)
+{
+  diagram
+    (activate $ActivateIf0
+      if i0 + i1 = 0
+      then
+        {
+          diagram
+            (let o0 = i0 - i1;
+            #pragma diagram {"xy":"h0;v0","wh":"20000;3200"} #end)
+        #pragma diagram {"xy":"h0;v-4100","wh":"28000;7200"} #end
+        }
+      else
+        {
+          diagram
+            (let o0 = i0 + i1;
+            #pragma diagram {"xy":"h0;v0","wh":"20000;3200"} #end)
+        #pragma diagram {"xy":"h0;v7300","wh":"28000;7200"} #end
+        }
+    #pragma diagram {"xy":"H-30375;V-48400","wh":"31000;24800"} #end)
+}

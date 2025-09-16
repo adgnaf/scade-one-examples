@@ -1,0 +1,24 @@
+-- version swan: 2025.0 graph: 2.0
+node temporalWindow (i0: int32;)
+  returns (o0: int32^8;
+           o1 : int32^8;)
+{
+  diagram
+    (#0 expr 0^8
+    #pragma diagram {"xy":"H-10300;V-9225"} #end)
+    (#1 def o0
+    #pragma diagram {"xy":"H41700;V-7325"} #end)
+    (#2 expr i0
+    #pragma diagram {"xy":"H-10300;V-5425"} #end)
+    (#3 expr window <<8>> (#4) (#5)
+      where
+        (#4 group)
+        (#5 group)
+    #pragma diagram {"xy":"H14700;V-7325","wh":"18000;7000"} #end)
+    (let o1 = window <<8>> (0^8) (i0);
+    #pragma diagram {"xy":"H3700;V3000","wh":"36000;3200"} #end)
+    
+    (#7 wire #3 => #1)
+    (#8 wire #0 => #4)
+    (#9 wire #2 => #5)
+}

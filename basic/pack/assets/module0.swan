@@ -1,0 +1,20 @@
+-- version swan: 2025.0 graph: 2.0
+function p (i0: int32^6;)
+  returns (o0: int32^2^3;
+           o1 : int32^2^3;)
+{
+  diagram
+    (let o1 = pack<<2, 3>> (i0);
+    #pragma diagram {"xy":"H2000;V11675","wh":"30000;3200"} #end)
+    (#1 expr pack << 2,  3>>(#2)
+      where
+        (#2 group)
+    #pragma diagram {"xy":"H13925;V1375","wh":"22000;7000"} #end)
+    (#3 expr i0
+    #pragma diagram {"xy":"H-13075;V1375"} #end)
+    (#4 def o0
+    #pragma diagram {"xy":"H40925;V1375"} #end)
+    
+    (#5 wire #3 => #2)
+    (#6 wire #1 => #4)
+}

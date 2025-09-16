@@ -1,0 +1,30 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use module0;
+
+_harness harness_arith
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::arith
+                                          #pragma diagram {"xy":"H0;V0","wh":"20000;14000"} #end)
+}
+
+_harness harness_bitwise
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::bitwise
+                                          #pragma diagram {"xy":"H0;V0","wh":"20000;14000"} #end)
+}
+
+_harness harness_boolean
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::boolean
+                                          #pragma diagram {"xy":"H0;V0","wh":"20000;14000"} #end)
+}
+
+_harness harness_array
+{
+  diagram
+    (#0 #pragma swt under_test #end block module0::array
+                                          #pragma diagram {"xy":"H0;V0","wh":"20000;14000"} #end)
+}

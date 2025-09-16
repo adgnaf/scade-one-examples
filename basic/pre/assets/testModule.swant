@@ -1,0 +1,20 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use module0;
+
+_harness harness_preTest
+{
+  diagram
+    (#0 block module0::preTest
+              #pragma diagram {"xy":"H14800;V-2037","wh":"20000;14000"} #end)
+    (#1 expr (node (i: int32^5) returns (o: int32) {
+             var
+             idx: int32 default = 0;
+             
+             let
+             o = (i.[idx] default 0);
+             idx = 0 pre (idx + 1);
+             })([2,3,5,7,11])
+    #pragma diagram {"xy":"H-31700;V-2037","wh":"42000;15376"} #end)
+    
+    (#2 wire #1 => #0)
+}
