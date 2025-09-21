@@ -1,0 +1,16 @@
+-- version swan: 2025.0 graph: 2.0 swant: 1.1
+use m;
+
+_harness harness_sliding_q_g
+{
+  diagram
+    (#0 #pragma swt under_test #end block m::sliding_q_g
+                                          #pragma diagram {"xy":"H0;V0","wh":"20000;14000"} #end)
+    (#1 expr 2.0
+    #pragma diagram {"xy":"H-29900;V3500"} #end)
+    (#2 expr 3.0
+    #pragma diagram {"xy":"H-29900;V-3500"} #end)
+    
+    (#3 wire #1 => #0 .(1))
+    (#4 wire #2 => #0 .(2))
+}

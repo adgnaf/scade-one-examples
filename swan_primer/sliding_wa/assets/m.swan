@@ -1,0 +1,52 @@
+-- version swan: 2025.0 graph: 2.0
+{text%node sliding_wa_t (x: float64)
+      returns (wa: float64)
+      {
+      var w;
+      let 
+      w = window<<4>> (0.^4) (x);
+      wa = (x + w[0]*c[0] + w[1]*c[1] + w[2]*c[2] + w[3]*c[3]) / d;
+      
+      }%text}
+
+const c: float64^4 = [0.5, 0.25, 0.125, 0.0625];
+
+const d: float64 = 1.0 + c[0] + c[1] + c[2] + c[3];
+
+node sliding_wa_g (x: float64;)
+  returns (wa: float64;)
+{
+  diagram
+    (#0 expr window <<4>> (#1) (#2)
+      where
+        (#1 group)
+        (#2 group)
+    #pragma diagram {"xy":"H-10150;V-5050","wh":"18000;7000"} #end)
+    (#3 expr (0.)^4
+    #pragma diagram {"xy":"H-36150;V-6950","wh":"10000;3200"} #end)
+    (#4 expr x
+    #pragma diagram {"xy":"H-35150;V-3150"} #end)
+    (#5 def w
+    #pragma diagram {"xy":"H14850;V-5050"} #end)
+    (#6 expr (+) (1, w[0]*c[0], w[1]*c[1], w[2]*c[2], w[3]*c[3])
+    #pragma diagram {"xy":"H-34150;V7500","wh":"52000;3200"} #end)
+    (#7 expr #8 / #9
+      where
+        (#8 group)
+        (#9 group)
+    #pragma diagram {"xy":"H8850;V9400"} #end)
+    (#10 expr d
+    #pragma diagram {"xy":"H-12150;V11300"} #end)
+    (#11 def wa
+    #pragma diagram {"xy":"H29850;V9400"} #end)
+    
+    (#12 wire #3 => #1)
+    (#13 wire #4 => #2)
+    (#14 wire #0 => #5)
+    (#15 wire #6 => #8)
+    (#16 wire #10 => #9)
+    (#17 wire #7 => #11)
+    
+    (var
+        w;)
+}
