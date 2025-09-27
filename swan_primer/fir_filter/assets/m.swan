@@ -1,0 +1,58 @@
+-- version swan: 2025.0 graph: 2.0
+{text%-- finite impulse reponse filter
+      node FIR_filter_t <<N>> (x: 'T; B: 'T^(N+1))
+      returns (y: 'T) where 'T float
+      {
+      -- y = B[0]*x + sigma(k=1..N)(B[k]*x_(n-k)
+      let y = (fold fmac_t) <<N>> (B[0]*x, B[1 .. N], window <<N>> (0^N)(x));
+      }%text}
+
+{text%-- fuse multiply-accumulate 
+      function fmac_t  (acc: 'T; c: 'T; x: 'T)
+      returns (o: 'T) where 'T  float
+      {
+          let o = acc + c * x;
+      }%text}
+
+{text%node main (x: float32)
+      returns (y: float32; y_g: float32)
+      {
+      let 
+      -- finite impulse response
+      y = FIR_filter_t <<8>> (x, 0^9);
+      y_g = FIR_filter_g <<8>> (x, 0^9);
+      }%text}
+
+node FIR_filter_g <<N>> (x: 'T;
+                         B : 'T^(N+1);)
+  returns (y: 'T;)
+  where 'T float
+{
+  diagram
+    (#0 block (fold fmac_t) <<N>>
+    #pragma diagram {"xy":"H17900;V-9888","wh":"24000;17975"} #end)
+    (#2 expr B[0] * x
+    #pragma diagram {"xy":"H-16000;V-15879","wh":"12000;3200"} #end)
+    (#3 expr B[1 .. N]
+    #pragma diagram {"xy":"H-17000;V-9887","wh":"14000;3200"} #end)
+    (#4 expr window <<N>> (#5) (#6)
+      where
+        (#5 group)
+        (#6 group)
+    #pragma diagram {"xy":"H-19000;V-3896","wh":"18000;7000"} #end)
+    (#7 expr 0^N
+    #pragma diagram {"xy":"H-44000;V-5796"} #end)
+    (#8 expr x
+    #pragma diagram {"xy":"H-44000;V-1996"} #end)
+    (#9 def y
+    #pragma diagram {"xy":"H39025;V-9888"} #end)
+    
+    (#10 wire #2 => #0 .(1)
+    #pragma diagram {"wp":"#2 h9450 v3317 #0"} #end)
+    (#11 wire #3 => #0 .(2))
+    (#12 wire #7 => #5)
+    (#13 wire #8 => #6)
+    (#14 wire #4 => #0 .(3))
+    (#15 wire #0 => #9
+    #pragma diagram {"wp":"v-1988|#0 #9"} #end)
+}
