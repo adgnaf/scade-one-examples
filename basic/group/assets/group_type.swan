@@ -1,0 +1,57 @@
+-- version swan: 2025.0 graph: 2.0
+group point = (x:float32, y:float32, z:float32);
+
+{text%function buildPos (x:float32; y: float32; z: float32)
+      returns (w: point)
+      {
+      let w = (x:x, y:y, z:z);
+      }%text}
+
+function main (x: float32;
+               y : float32;
+               z : float32;
+               dx : float32;)
+  returns (ret: point;)
+{
+  diagram
+    (#0 block buildPos
+              #pragma diagram {"xy":"H1500;V-600","wh":"20000;14000"} #end)
+    (#1 group
+    #pragma diagram {"xy":"H-27900;V-600","wh":"800;14000"} #end)
+    (#2 expr x
+    #pragma diagram {"xy":"H-48200;V4067"} #end)
+    (#3 expr y
+    #pragma diagram {"xy":"H-48200;V-5267"} #end)
+    (#4 expr z
+    #pragma diagram {"xy":"H-48200;V-600"} #end)
+    (#9 block updatePos
+              #pragma diagram {"xy":"H40900;V-4300","wh":"20000;14000"} #end)
+    (#10 expr dx
+    #pragma diagram {"xy":"H7500;V-9700"} #end)
+    (#11 def ret
+    #pragma diagram {"xy":"H70400;V-4300"} #end)
+    (#12 def localPoint
+    #pragma diagram {"xy":"H67400;V1100","wh":"14000;3200"} #end)
+    
+    (#5 wire #2 => #1 .(x))
+    (#6 wire #3 => #1 .(y))
+    (#7 wire #4 => #1 .(z))
+    (#8 wire #1 => #0
+    #pragma diagram {"wp":"v0|#1 #0"} #end)
+    (#13 wire #0 => #9 .(v)
+    #pragma diagram {"wp":"v-1850|#0 #9"} #end)
+    (#14 wire #10 => #9 .(dx))
+    (#15 wire #9 .(w) => #11
+    #pragma diagram {"wp":"v0|#9 #11"} #end)
+    (#16 wire #9 .(w) => #12
+    #pragma diagram {"wp":"v5400|#9 #12"} #end)
+    
+    (var
+        localPoint:point;)
+}
+
+{text%function updatePos (v: point; dx: float32)
+      returns (w: point)
+      {
+      let w = (x: (v.(x) + dx), y: v.(y), z: v.(z));
+      }%text}

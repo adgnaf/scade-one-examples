@@ -27,3 +27,25 @@ function test ()
     (#6 wire #0 => #3
     #pragma diagram {"wp":"v0|#0 #3"} #end)
 }
+
+function foldTest_g <<M>> (acc: 'T;
+                           arr : 'T^M;)
+  returns (o: 'T;)
+  where 'T numeric
+{
+  diagram
+    (#0 block (fold ({op_expr%function acc, elem => acc + elem%op_expr})) <<M>>
+    #pragma diagram {"xy":"H-8375;V-7925","wh":"24000;17975"} #end)
+    (#2 def o
+    #pragma diagram {"xy":"H23125;V-7925"} #end)
+    (#3 expr acc
+    #pragma diagram {"xy":"H-40275;V-3431"} #end)
+    (#4 expr arr
+    #pragma diagram {"xy":"H-40275;V-12419"} #end)
+    
+    (#5 wire #3 => #0 .(1))
+    (#6 wire #4 => #0 .(2)
+    #pragma diagram {"wp":"#4 h9450 v1734 #0"} #end)
+    (#7 wire #0 => #2
+    #pragma diagram {"wp":"v-1988|#0 #2"} #end)
+}

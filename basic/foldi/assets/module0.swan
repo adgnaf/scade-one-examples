@@ -17,7 +17,7 @@ function test ()
               #pragma diagram {"xy":"H700;V-9875","wh":"20000;14000"} #end)
     (#1 expr 0
     #pragma diagram {"xy":"H-29200;V-6375"} #end)
-    (#2 expr 2 ^ 8 
+    (#2 expr 2 ^ 8
     #pragma diagram {"xy":"H-30200;V-13375","wh":"10000;3200"} #end)
     (#3 def o0
     #pragma diagram {"xy":"H30200;V-9875"} #end)
@@ -26,4 +26,26 @@ function test ()
     (#5 wire #1 => #0 .(1))
     (#6 wire #0 => #3
     #pragma diagram {"wp":"v0|#0 #3"} #end)
+}
+
+function foldiTest_g <<M>> (acc: 'T;
+                            arr : 'T^M;)
+  returns (o: 'T;)
+  where 'T numeric
+{
+  diagram
+    (#0 block (foldi ({op_expr%function idx, acc, elem => if idx > 3 then acc else (acc + elem)%op_expr})) <<M>>
+    #pragma diagram {"xy":"H-20825;V-7650","wh":"24000;17975"} #end)
+    (#2 expr acc
+    #pragma diagram {"xy":"H-52725;V-3156"} #end)
+    (#3 expr arr
+    #pragma diagram {"xy":"H-52725;V-12144"} #end)
+    (#4 def o
+    #pragma diagram {"xy":"H10675;V-7650"} #end)
+    
+    (#5 wire #2 => #0 .(1))
+    (#6 wire #3 => #0 .(2)
+    #pragma diagram {"wp":"#3 h9450 v1734 #0"} #end)
+    (#7 wire #0 => #4
+    #pragma diagram {"wp":"v-1988|#0 #4"} #end)
 }

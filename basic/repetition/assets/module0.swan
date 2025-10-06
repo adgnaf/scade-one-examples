@@ -6,7 +6,7 @@ function repetition (i0: int32;)
   diagram
     (#0 expr i0
     #pragma diagram {"xy":"H-9825;V-11675"} #end)
-    (#1 expr #2 ^ ( 8)
+    (#1 expr #2 ^ (8)
       where
         (#2 group)
     #pragma diagram {"xy":"H11175;V-11675","wh":"10000;7000"} #end)

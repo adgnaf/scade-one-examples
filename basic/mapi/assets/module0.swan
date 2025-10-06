@@ -27,3 +27,25 @@ function test ()
     (#6 wire #0 => #3
     #pragma diagram {"wp":"v0|#0 #3"} #end)
 }
+
+function elemWiseAdd2_g <<M>> (arr1: 'T^M;
+                               arr2 : 'T^M;)
+  returns (o_arr: 'T^M;)
+  where 'T numeric
+{
+  diagram
+    (#0 block (mapi ({op_expr%function idx, u, v => if idx > 3 then u else (u+v)%op_expr})) <<M>>
+    #pragma diagram {"xy":"H-22200;V-9325","wh":"24000;17975"} #end)
+    (#2 def o_arr
+    #pragma diagram {"xy":"H10300;V-9325","wh":"10000;3200"} #end)
+    (#3 expr arr1
+    #pragma diagram {"xy":"H-54100;V-4831"} #end)
+    (#4 expr arr2
+    #pragma diagram {"xy":"H-54100;V-13819"} #end)
+    
+    (#5 wire #3 => #0 .(1))
+    (#6 wire #4 => #0 .(2)
+    #pragma diagram {"wp":"#4 h9450 v1734 #0"} #end)
+    (#7 wire #0 => #2
+    #pragma diagram {"wp":"v-1988|#0 #2"} #end)
+}

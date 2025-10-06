@@ -1,0 +1,140 @@
+-- version swan: 2025.0 graph: 2.0
+{text%function op3 ()
+      returns (x: int32; y: int32; z: int32)
+      {
+      let 
+      x = 1;
+      y = 2;
+      z = 3;
+      }%text}
+
+{text%function op4 (x: int32; y: int32; z: int32)
+      returns (sum: int32)
+      {
+      let sum = x + y + z;
+      }%text}
+
+function group_example (i0 : int32;
+                        i1 : int32;
+                        i2 : int32;)
+  returns (sum: int32;
+           ret : int32;
+           ret2 : int32;
+           ret3 : int32;
+           x : int32;
+           y : int32;
+           z : int32;)
+{
+  diagram
+    (#0 block op3
+              #pragma diagram {"xy":"H-14025;V-8200","wh":"20000;14000"} #end)
+    (#1 block op4
+              #pragma diagram {"xy":"H24975;V-8200","wh":"20000;14000"} #end)
+    (#2 def sum
+    #pragma diagram {"xy":"H54475;V-8200"} #end)
+    (#5 block op1
+              #pragma diagram {"xy":"H-28612;V11300","wh":"20000;14000"} #end)
+    (#6 block op2
+              #pragma diagram {"xy":"H34388;V11300","wh":"20000;14000"} #end)
+    (#7 group byname
+    #pragma diagram {"xy":"H2888;V11300"} #end)
+    (#8 def ret
+    #pragma diagram {"xy":"H63888;V11300"} #end)
+    (#9 block op1
+              #pragma diagram {"xy":"H-29971;V30800","wh":"20000;14000"} #end)
+    (#10 block op2
+               #pragma diagram {"xy":"H33029;V30800","wh":"20000;14000"} #end)
+    (#11 group bypos
+    #pragma diagram {"xy":"H1529;V30800"} #end)
+    (#12 def ret2
+    #pragma diagram {"xy":"H62529;V30800"} #end)
+    (#13 block op1
+               #pragma diagram {"xy":"H104465;V-10625","wh":"20000;14000"} #end)
+    (#14 block op2
+               #pragma diagram {"xy":"H152865;V-10625","wh":"20000;14000"} #end)
+    (#22 def ret3
+    #pragma diagram {"xy":"H182365;V-10625"} #end)
+    (#24 block op1
+               #pragma diagram {"xy":"H104895;V31725","wh":"20000;14000"} #end)
+    (#25 block op5
+               #pragma diagram {"xy":"H149695;V20725","wh":"20000;14000"} #end)
+    (#26 block op2
+               #pragma diagram {"xy":"H149695;V35225","wh":"20000;14000"} #end)
+    (#29 block op1
+               #pragma diagram {"xy":"H200875;V-10550","wh":"20000;14000"} #end)
+    (#30 group
+    #pragma diagram {"xy":"H230275;V-10550","wh":"800;14000"} #end)
+    (#31 def x
+    #pragma diagram {"xy":"H250575;V-15350"} #end)
+    (#32 def y
+    #pragma diagram {"xy":"H250575;V-10550"} #end)
+    (#33 def z
+    #pragma diagram {"xy":"H250575;V-5750"} #end)
+    (#38 block op2
+               #pragma diagram {"xy":"H248962;V19643","wh":"20000;14000"} #end)
+    (#39 group
+    #pragma diagram {"xy":"H219562;V19643","wh":"800;14000"} #end)
+    (#40 expr i0
+    #pragma diagram {"xy":"H199262;V24309"} #end)
+    (#41 expr i1
+    #pragma diagram {"xy":"H199262;V14976"} #end)
+    (#42 expr i2
+    #pragma diagram {"xy":"H199262;V19643"} #end)
+    
+    (#3 wire #0 => #1
+    #pragma diagram {"wp":"v0|#0 #1"} #end)
+    (#4 wire #1 => #2
+    #pragma diagram {"wp":"v0|#1 #2"} #end)
+    (#15 wire #5 => #7
+    #pragma diagram {"wp":"v0|#5 #7"} #end)
+    (#16 wire #7 => #6)
+    (#17 wire #6 => #8
+    #pragma diagram {"wp":"v0|#6 #8"} #end)
+    (#18 wire #9 => #11
+    #pragma diagram {"wp":"v0|#9 #11"} #end)
+    (#19 wire #11 => #10)
+    (#20 wire #10 => #12
+    #pragma diagram {"wp":"v0|#10 #12"} #end)
+    (#21 wire #13 .(z:x,y:y,x:z) => #14
+    #pragma diagram {"wp":"v0|#13 #14"} #end)
+    (#23 wire #14 => #22
+    #pragma diagram {"wp":"v0|#14 #22"} #end)
+    (#27 wire #24 .(x:a,y:b) => #25
+    #pragma diagram {"wp":"v-5500|#24 #25"} #end)
+    (#28 wire #24 .(x,y,z) => #26
+    #pragma diagram {"wp":"v1750|#24 #26"} #end)
+    (#34 wire #29 => #30
+    #pragma diagram {"wp":"v0|#29 #30"} #end)
+    (#35 wire #30 .(x) => #31
+    #pragma diagram {"wp":"v-4800|#30 #31"} #end)
+    (#36 wire #30 .(y) => #32
+    #pragma diagram {"wp":"v0|#30 #32"} #end)
+    (#37 wire #30 .(z) => #33
+    #pragma diagram {"wp":"v4800|#30 #33"} #end)
+    (#43 wire #39 => #38
+    #pragma diagram {"wp":"v0|#39 #38"} #end)
+    (#44 wire #40 => #39 .(z))
+    (#45 wire #41 => #39 .(y))
+    (#46 wire #42 => #39 .(x))
+}
+
+{text%function op1 ()
+      returns (x: int32; y: int32; z: int32)
+      {
+      let 
+      x = 1;
+      y = 2; 
+      z = 3;
+      }%text}
+
+{text%function op2 (z: int32; y: int32; x: int32)
+      returns (ret: int32)
+      {
+      let ret = x + y - z;
+      }%text}
+
+{text%function op5 (a: int32; b: int32)
+      returns (sum: int32)
+      {
+      let sum = a + b;
+      }%text}

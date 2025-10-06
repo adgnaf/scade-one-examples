@@ -15,8 +15,3 @@ node preTest (i0: int32;)
     (#4 wire #2 => #1)
     (#5 wire #0 => #3)
 }
-
-node operator1 (i0: int32;)
-  returns (o0: int32;)
-{
-}

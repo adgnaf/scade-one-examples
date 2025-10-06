@@ -37,3 +37,38 @@ function test ()
     (#10 wire #0 .(2) => #5
     #pragma diagram {"wp":"v3500|#0 #5"} #end)
 }
+
+function mapfoldiTest_g <<M>> (acc: 'T;
+                               arr1 : 'T^M;
+                               arr2 : 'T^M;)
+  returns (o_acc: 'T;
+           o_arr : 'T^M;)
+  where 'T numeric
+{
+  diagram
+    (#0 block (mapfoldi ({op_expr%function (idx: int32; acc: 'T; elem1: 'T; elem2: 'T) returns (o_acc: 'T; o_elem: 'T) {
+                                  let 
+                                  o_acc = if idx > 3 then acc else (acc + elem1 + elem2);
+                                  o_elem = elem1 + elem2;
+                                  } %op_expr})) <<M>>
+    #pragma diagram {"xy":"H-8925;V-1650","wh":"24000;17975"} #end)
+    (#2 expr acc
+    #pragma diagram {"xy":"H-40825;V4342"} #end)
+    (#3 expr arr1
+    #pragma diagram {"xy":"H-40825;V-7642"} #end)
+    (#4 expr arr2
+    #pragma diagram {"xy":"H-40825;V-1650"} #end)
+    (#5 def o_acc
+    #pragma diagram {"xy":"H23975;V-6144","wh":"10000;3200"} #end)
+    (#6 def o_arr
+    #pragma diagram {"xy":"H23975;V2844","wh":"10000;3200"} #end)
+    
+    (#7 wire #2 => #0 .(1))
+    (#8 wire #3 => #0 .(2)
+    #pragma diagram {"wp":"#3 h9450 v2686 #0"} #end)
+    (#9 wire #4 => #0 .(3))
+    (#10 wire #0 .(1) => #5
+    #pragma diagram {"wp":"v-4748|#0 h7950 v-1734 #5"} #end)
+    (#11 wire #0 .(2) => #6
+    #pragma diagram {"wp":"v2506|#0 #6"} #end)
+}

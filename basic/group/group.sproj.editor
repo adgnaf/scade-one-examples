@@ -1,0 +1,8 @@
+{
+  "JobsOrder": [],
+  "ModulesOrder": [
+    "assets\\ins_conn.swan",
+    "assets\\group_type.swan",
+    "assets\\group_wires.swan"
+  ]
+}

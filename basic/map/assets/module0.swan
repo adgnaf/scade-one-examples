@@ -15,3 +15,25 @@
       {
       let o0 = elemWiseAdd <<2>> ([1,2], [3,4]);
       }%text}
+
+function elemWiseAdd_g <<M>> (a: 'T^M;
+                              b : 'T ^M;)
+  returns (o: 'T^M;)
+  where 'T numeric
+{
+  diagram
+    (#0 block (map ({op_expr%function u, v => u + v%op_expr})) <<M>>
+    #pragma diagram {"xy":"H-15750;V-7575","wh":"24000;17975"} #end)
+    (#2 def o
+    #pragma diagram {"xy":"H15750;V-7575"} #end)
+    (#3 expr a
+    #pragma diagram {"xy":"H-47650;V-3081"} #end)
+    (#4 expr b
+    #pragma diagram {"xy":"H-47650;V-12069"} #end)
+    
+    (#5 wire #0 => #2
+    #pragma diagram {"wp":"v-1988|#0 #2"} #end)
+    (#6 wire #3 => #0 .(1))
+    (#7 wire #4 => #0 .(2)
+    #pragma diagram {"wp":"#4 h9450 v1734 #0"} #end)
+}

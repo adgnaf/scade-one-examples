@@ -1,0 +1,23 @@
+-- version swan: 2025.0 graph: 2.0
+{text%function reverse_t (i0: int32^8)
+      returns (o0: int32^8)
+      {
+      let o0 = reverse(i0);
+      }%text}
+
+function reverse_g (i0: int32^8;)
+  returns (o0: int32^8;)
+{
+  diagram
+    (#0 expr reverse (#1)
+      where
+        (#1 group)
+    #pragma diagram {"xy":"H-7175;V-3600"} #end)
+    (#2 def o0
+    #pragma diagram {"xy":"H14825;V-3600"} #end)
+    (#3 expr i0
+    #pragma diagram {"xy":"H-29175;V-3600"} #end)
+    
+    (#4 wire #3 => #1)
+    (#5 wire #0 => #2)
+}
