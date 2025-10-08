@@ -1,0 +1,45 @@
+-- version swan: 2025.0 graph: 2.0
+inline function plumbing (x: int32;
+                          y : int32;)
+  returns (dx: int32;
+           dy : int32;)
+{
+  diagram
+    (#0 expr x
+    #pragma diagram {"xy":"H-20775;V-4275"} #end)
+    (#1 def dx
+    #pragma diagram {"xy":"H-775;V-4275"} #end)
+    (#2 expr y
+    #pragma diagram {"xy":"H-20600;V2800"} #end)
+    (#3 def dy
+    #pragma diagram {"xy":"H-600;V2800"} #end)
+    
+    (#4 wire #0 => #1)
+    (#5 wire #2 => #3)
+}
+
+function main (w: int32;)
+  returns (z: int32;)
+{
+  diagram
+    (#0 expr w
+    #pragma diagram {"xy":"H-23025;V-5400"} #end)
+    (#1 def v
+    #pragma diagram {"xy":"H36775;V-12400"} #end)
+    (#2 expr v
+    #pragma diagram {"xy":"H-23025;V-12400"} #end)
+    (#3 def z
+    #pragma diagram {"xy":"H36775;V-5400"} #end)
+    (#4 block plumbing
+              #pragma diagram {"xy":"H6875;V-8900","wh":"20000;14000"} #end)
+    
+    (#5 wire #0 => #4 .(1))
+    (#6 wire #2 => #4 .(2))
+    (#7 wire #4 .(1) => #1
+    #pragma diagram {"wp":"v-3500|#4 #1"} #end)
+    (#8 wire #4 .(2) => #3
+    #pragma diagram {"wp":"v3500|#4 #3"} #end)
+    
+    (var
+        v:int32;)
+}
