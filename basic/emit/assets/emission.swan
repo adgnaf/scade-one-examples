@@ -1,0 +1,8 @@
+-- version swan: 2025.0 graph: 2.0
+{text%function emit_bool_t (in: bool)
+      returns (out: bool)
+      {
+      var signal_a : bool;
+      emit 'signal_a if in;
+      let out = signal_a;
+      }%text}
