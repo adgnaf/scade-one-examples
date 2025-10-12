@@ -1,0 +1,350 @@
+-- version swan: 2025.0 graph: 2.0
+{text%-- low to high
+      node Raising (in: bool; initVal: bool)
+      returns (out: bool)
+      {
+      let out = initVal -> (not(pre(in)) and in);
+      }%text}
+
+{text%-- high to low
+      node Failing (in: bool; initVal: bool)
+      returns (out: bool)
+      {
+      let out = initVal -> (pre(in) and not(in));
+      }%text}
+
+node Button (button: bool;
+             lock : bool;
+             unlock : bool;
+             deselect : bool;)
+  returns (preselLight: bool;
+           selectLight : bool;)
+{
+  diagram
+    (#2 def preselLight
+    #pragma diagram {"xy":"H54194;V-78275","wh":"16000;3200"} #end)
+    (#3 def selectLight
+    #pragma diagram {"xy":"H52756;V-71281","wh":"16000;3200"} #end)
+    (#4 expr sigLightPresel
+    #pragma diagram {"xy":"H25194;V-78275","wh":"18000;3200"} #end)
+    (#5 expr sigLightSel
+    #pragma diagram {"xy":"H24756;V-71281","wh":"16000;3200"} #end)
+    
+    (#6 wire #5 => #3)
+    (#7 wire #4 => #2)
+    
+    (var
+        sigLightPresel:bool;
+        sigLightSel:bool;)
+    (automaton $button
+      initial state #0 Unselected
+      #pragma diagram {"xy":"h-9100;v31800","wh":"12000;12000"} #end :
+      state #1 WaitUnlock
+      #pragma diagram {"xy":"h18900;v7800","wh":"12000;12000"} #end :
+      state #9 Preselected
+      #pragma diagram {"xy":"h-9100;v-10200","wh":"32000;11200"} #end :
+        diagram
+          (emit 'sigLightPresel;
+          #pragma diagram {"xy":"h0;v0","wh":"24000;3200"} #end)
+      state #11 Locked
+      #pragma diagram {"xy":"h-9100;v-32200","wh":"30000;11200"} #end :
+        diagram
+          (emit 'sigLightSel;
+          #pragma diagram {"xy":"h0;v0","wh":"22000;3200"} #end)
+      :1: #0 unless if (lock)
+      restart #1
+      #pragma diagram {"tp":"h2600;v-6000|#0 v-500 v-500 v-500 v-8388 h8700;v-8388 h8700 h667 h667 h-6000;v-275|#1"} #end;
+      :2: #0 unless if (button)
+      restart #9
+      #pragma diagram {"tp":"h6000;v2725|#0 h500 h500 h500 h15550 h15550;v-11250 v-11250 v-17892 h-4219;v-4608 h-16381 h-667 h-667 h16000;v-275|#9"} #end;
+      :1: #9 unless if (lock)
+      restart #11
+      #pragma diagram {"tp":"h-16000;v-275|#9 h-500 h-500 h-500 h-1450 h-1450;v-2900 v-2900 v-8100 h1700;v-8100 h1700 h667 h667 h-15000;v-275|#11"} #end;
+      :2: #9 unless if (deselect)
+      restart #0
+      #pragma diagram {"tp":"h-2900;v5600|#9 v10133 v10133 h-2900;v-6000|#0"} #end;
+      :1: #11 unless if (unlock)
+      restart #9
+      #pragma diagram {"tp":"h100;v5600|#11 v3600 v3600 h100;v-5600|#9"} #end;
+      :1: #1 unless if (unlock)
+      restart #0
+      #pragma diagram {"tp":"h100;v6000|#1 v500 v500 v500 v6862 h-10050;v6862 h-10050 h-667 h-667 h6000;v-2775|#0"} #end;
+      #pragma diagram {"xy":"H44775;V-24088","wh":"67000;83600"} #end)
+}
+
+node ABC (A: bool;
+          B : bool;
+          C : bool;
+          LOCK : bool;)
+  returns (A_PRESELECTED_ON: bool;
+           B_PRESELECTED_ON : bool;
+           C_PRESELECTED_ON : bool;
+           A_PRESELECTED_OFF : bool;
+           B_PRESELECTED_OFF : bool;
+           C_PRESELECTED_OFF : bool;
+           A_LOCKED_ON : bool;
+           B_LOCKED_ON : bool;
+           C_LOCKED_ON : bool;
+           A_LOCKED_OFF : bool;
+           B_LOCKED_OFF : bool;
+           C_LOCKED_OFF : bool;)
+{
+  diagram
+    (#0 def localLock
+    #pragma diagram {"xy":"H-3425;V8800","wh":"14000;3200"} #end)
+    (#1 def localUnlock
+    #pragma diagram {"xy":"H-1925;V15725","wh":"16000;3200"} #end)
+    (#2 expr lockSig
+    #pragma diagram {"xy":"H-28425;V8800","wh":"12000;3200"} #end)
+    (#3 expr unlockSig
+    #pragma diagram {"xy":"H-28925;V15725","wh":"14000;3200"} #end)
+    (#8 def A_selLight
+    #pragma diagram {"xy":"H97500;V49588","wh":"14000;3200"} #end)
+    (#9 def A_preselLight
+    #pragma diagram {"xy":"H95500;V42588","wh":"18000;3200"} #end)
+    (#10 block Button
+               #pragma diagram {"xy":"H60600;V46088","wh":"20000;14000"} #end)
+    (#11 expr A
+    #pragma diagram {"xy":"H30700;V51738"} #end)
+    (#12 expr localLock
+    #pragma diagram {"xy":"H27700;V40638","wh":"14000;3200"} #end)
+    (#13 expr localUnlock
+    #pragma diagram {"xy":"H26700;V44338","wh":"16000;3200"} #end)
+    (#14 expr deselect
+    #pragma diagram {"xy":"H28700;V48038","wh":"12000;3200"} #end)
+    (#15 def B_preselLight
+    #pragma diagram {"xy":"H97375;V71738","wh":"18000;3200"} #end)
+    (#16 def B_selLight
+    #pragma diagram {"xy":"H99375;V78738","wh":"14000;3200"} #end)
+    (#17 block Button
+               #pragma diagram {"xy":"H62475;V75238","wh":"20000;14000"} #end)
+    (#18 expr B
+    #pragma diagram {"xy":"H32575;V80888"} #end)
+    (#19 expr localUnlock
+    #pragma diagram {"xy":"H28575;V69788","wh":"16000;3200"} #end)
+    (#20 expr deselect
+    #pragma diagram {"xy":"H30575;V73488","wh":"12000;3200"} #end)
+    (#21 expr localLock
+    #pragma diagram {"xy":"H29575;V77188","wh":"14000;3200"} #end)
+    (#22 block Button
+               #pragma diagram {"xy":"H62475;V100687","wh":"20000;14000"} #end)
+    (#23 def C_preselLight
+    #pragma diagram {"xy":"H97375;V97187","wh":"18000;3200"} #end)
+    (#24 def C_selLight
+    #pragma diagram {"xy":"H99375;V104187","wh":"14000;3200"} #end)
+    (#25 expr C
+    #pragma diagram {"xy":"H32575;V106337"} #end)
+    (#26 expr localUnlock
+    #pragma diagram {"xy":"H28575;V95237","wh":"16000;3200"} #end)
+    (#27 expr deselect
+    #pragma diagram {"xy":"H30575;V98937","wh":"12000;3200"} #end)
+    (#28 expr localLock
+    #pragma diagram {"xy":"H29575;V102637","wh":"14000;3200"} #end)
+    (#29 def deselect
+    #pragma diagram {"xy":"H74806;V123106","wh":"12000;3200"} #end)
+    (#30 expr A or B or C
+    #pragma diagram {"xy":"H48806;V123106","wh":"16000;3200"} #end)
+    (#31 def A_PRESELECTED_ON
+    #pragma diagram {"xy":"H75531;V144020","wh":"20000;3200"} #end)
+    (#32 def A_PRESELECTED_OFF
+    #pragma diagram {"xy":"H72750;V161625","wh":"20000;3200"} #end)
+    (#33 def A_LOCKED_ON
+    #pragma diagram {"xy":"H70275;V178863","wh":"16000;3200"} #end)
+    (#34 def A_LOCKED_OFF
+    #pragma diagram {"xy":"H69412;V200962","wh":"16000;3200"} #end)
+    (#35 block Raising
+               #pragma diagram {"xy":"H39631;V144020","wh":"20000;14000"} #end)
+    (#36 expr A_preselLight
+    #pragma diagram {"xy":"H4731;V147520","wh":"18000;3200"} #end)
+    (#37 expr false
+    #pragma diagram {"xy":"H8731;V140520","wh":"10000;3200"} #end)
+    (#38 block Failing
+               #pragma diagram {"xy":"H36850;V161625","wh":"20000;14000"} #end)
+    (#39 expr A_preselLight
+    #pragma diagram {"xy":"H1950;V165125","wh":"18000;3200"} #end)
+    (#40 expr true
+    #pragma diagram {"xy":"H6950;V158125"} #end)
+    (#41 block Raising
+               #pragma diagram {"xy":"H36375;V178863","wh":"20000;14000"} #end)
+    (#42 expr A_selLight
+    #pragma diagram {"xy":"H3475;V182363","wh":"14000;3200"} #end)
+    (#43 expr false
+    #pragma diagram {"xy":"H5475;V175363","wh":"10000;3200"} #end)
+    (#44 block Failing
+               #pragma diagram {"xy":"H35512;V200962","wh":"20000;14000"} #end)
+    (#45 expr A_selLight
+    #pragma diagram {"xy":"H2612;V204462","wh":"14000;3200"} #end)
+    (#46 expr true
+    #pragma diagram {"xy":"H5612;V197462"} #end)
+    (#47 def B_PRESELECTED_ON
+    #pragma diagram {"xy":"H71313;V222650","wh":"20000;3200"} #end)
+    (#48 def B_PRESELECTED_OFF
+    #pragma diagram {"xy":"H78258;V244338","wh":"20000;3200"} #end)
+    (#49 def B_LOCKED_ON
+    #pragma diagram {"xy":"H75033;V268182","wh":"16000;3200"} #end)
+    (#50 def B_LOCKED_OFF
+    #pragma diagram {"xy":"H74691;V287324","wh":"16000;3200"} #end)
+    (#51 block Raising
+               #pragma diagram {"xy":"H35413;V222650","wh":"20000;14000"} #end)
+    (#52 expr B_preselLight
+    #pragma diagram {"xy":"H513;V226150","wh":"18000;3200"} #end)
+    (#53 expr false
+    #pragma diagram {"xy":"H4513;V219150","wh":"10000;3200"} #end)
+    (#54 block Failing
+               #pragma diagram {"xy":"H42358;V244338","wh":"20000;14000"} #end)
+    (#55 expr B_preselLight
+    #pragma diagram {"xy":"H7458;V247838","wh":"18000;3200"} #end)
+    (#56 expr true
+    #pragma diagram {"xy":"H12458;V240838"} #end)
+    (#57 block Raising
+               #pragma diagram {"xy":"H41133;V268182","wh":"20000;14000"} #end)
+    (#58 expr B_selLight
+    #pragma diagram {"xy":"H8233;V271682","wh":"14000;3200"} #end)
+    (#59 expr false
+    #pragma diagram {"xy":"H10233;V264682","wh":"10000;3200"} #end)
+    (#60 block Failing
+               #pragma diagram {"xy":"H40791;V287324","wh":"20000;14000"} #end)
+    (#61 expr B_selLight
+    #pragma diagram {"xy":"H7891;V290824","wh":"14000;3200"} #end)
+    (#62 expr false
+    #pragma diagram {"xy":"H9891;V283824","wh":"10000;3200"} #end)
+    (#106 def C_PRESELECTED_ON
+    #pragma diagram {"xy":"H78119;V307485","wh":"20000;3200"} #end)
+    (#107 def C_PRESELECTED_OFF
+    #pragma diagram {"xy":"H80119;V327646","wh":"20000;3200"} #end)
+    (#108 def C_LOCKED_ON
+    #pragma diagram {"xy":"H79119;V347914","wh":"16000;3200"} #end)
+    (#109 def C_LOCKED_OFF
+    #pragma diagram {"xy":"H79850;V372623","wh":"16000;3200"} #end)
+    (#110 block Raising
+                #pragma diagram {"xy":"H42219;V307485","wh":"20000;14000"} #end)
+    (#111 expr C_preselLight
+    #pragma diagram {"xy":"H7319;V310985","wh":"18000;3200"} #end)
+    (#112 expr false
+    #pragma diagram {"xy":"H11319;V303985","wh":"10000;3200"} #end)
+    (#113 block Failing
+                #pragma diagram {"xy":"H44219;V327646","wh":"20000;14000"} #end)
+    (#117 expr C_preselLight
+    #pragma diagram {"xy":"H9319;V331146","wh":"18000;3200"} #end)
+    (#118 expr true
+    #pragma diagram {"xy":"H14319;V324146"} #end)
+    (#119 block Raising
+                #pragma diagram {"xy":"H45219;V347914","wh":"20000;14000"} #end)
+    (#120 expr C_selLight
+    #pragma diagram {"xy":"H12319;V351414","wh":"14000;3200"} #end)
+    (#121 expr false
+    #pragma diagram {"xy":"H14319;V344414","wh":"10000;3200"} #end)
+    (#122 block Failing
+                #pragma diagram {"xy":"H45950;V372623","wh":"20000;14000"} #end)
+    (#123 expr C_selLight
+    #pragma diagram {"xy":"H13050;V376123","wh":"14000;3200"} #end)
+    (#124 expr true
+    #pragma diagram {"xy":"H16050;V369123"} #end)
+    
+    (#4 wire #2 => #0)
+    (#5 wire #3 => #1)
+    (#63 wire #11 => #10 .(1))
+    (#64 wire #12 => #10 .(2))
+    (#65 wire #13 => #10 .(3))
+    (#66 wire #14 => #10 .(4))
+    (#67 wire #10 .(1) => #9
+    #pragma diagram {"wp":"v-3500|#10 #9"} #end)
+    (#68 wire #10 .(2) => #8
+    #pragma diagram {"wp":"v3500|#10 #8"} #end)
+    (#69 wire #18 => #17 .(1))
+    (#70 wire #21 => #17 .(2))
+    (#71 wire #19 => #17 .(3))
+    (#72 wire #20 => #17 .(4))
+    (#73 wire #17 .(1) => #15
+    #pragma diagram {"wp":"v-3500|#17 #15"} #end)
+    (#74 wire #17 .(2) => #16
+    #pragma diagram {"wp":"v3500|#17 #16"} #end)
+    (#75 wire #25 => #22 .(1))
+    (#76 wire #28 => #22 .(2))
+    (#77 wire #26 => #22 .(3))
+    (#78 wire #27 => #22 .(4))
+    (#79 wire #22 .(1) => #23
+    #pragma diagram {"wp":"v-3500|#22 #23"} #end)
+    (#80 wire #22 .(2) => #24
+    #pragma diagram {"wp":"v3500|#22 #24"} #end)
+    (#81 wire #30 => #29)
+    (#82 wire #36 => #35 .(1))
+    (#83 wire #37 => #35 .(2))
+    (#84 wire #35 .(1) => #31
+    #pragma diagram {"wp":"v-0|#35 #31"} #end)
+    (#85 wire #38 .(1) => #32
+    #pragma diagram {"wp":"v0|#38 #32"} #end)
+    (#86 wire #39 => #38 .(1))
+    (#87 wire #40 => #38 .(2))
+    (#88 wire #41 .(1) => #33
+    #pragma diagram {"wp":"v0|#41 #33"} #end)
+    (#89 wire #42 => #41 .(1))
+    (#90 wire #43 => #41 .(2))
+    (#91 wire #44 .(1) => #34
+    #pragma diagram {"wp":"v-1|#44 #34"} #end)
+    (#92 wire #45 => #44 .(1))
+    (#93 wire #46 => #44 .(2))
+    (#94 wire #51 .(1) => #47
+    #pragma diagram {"wp":"v0|#51 #47"} #end)
+    (#95 wire #52 => #51 .(1))
+    (#96 wire #53 => #51 .(2))
+    (#97 wire #55 => #54 .(1))
+    (#98 wire #56 => #54 .(2))
+    (#99 wire #54 .(1) => #48
+    #pragma diagram {"wp":"v0|#54 #48"} #end)
+    (#100 wire #57 .(1) => #49
+    #pragma diagram {"wp":"v-0|#57 #49"} #end)
+    (#101 wire #58 => #57 .(1))
+    (#102 wire #59 => #57 .(2))
+    (#103 wire #61 => #60 .(1))
+    (#104 wire #62 => #60 .(2))
+    (#105 wire #60 .(1) => #50
+    #pragma diagram {"wp":"v0|#60 #50"} #end)
+    (#114 wire #111 => #110 .(1))
+    (#115 wire #112 => #110 .(2))
+    (#116 wire #110 .(1) => #106
+    #pragma diagram {"wp":"v0|#110 #106"} #end)
+    (#125 wire #117 => #113 .(1))
+    (#126 wire #118 => #113 .(2))
+    (#127 wire #113 .(1) => #107
+    #pragma diagram {"wp":"v0|#113 #107"} #end)
+    (#128 wire #120 => #119 .(1))
+    (#129 wire #121 => #119 .(2))
+    (#130 wire #119 .(1) => #108
+    #pragma diagram {"wp":"v0|#119 #108"} #end)
+    (#131 wire #123 => #122 .(1))
+    (#132 wire #124 => #122 .(2))
+    (#133 wire #122 .(1) => #109
+    #pragma diagram {"wp":"v-0|#122 #109"} #end)
+    
+    (var
+        lockSig:bool;
+        unlockSig:bool;
+        A_preselLight:bool;
+        B_preselLight:bool;
+        C_preselLight:bool;
+        A_selLight:bool;
+        B_selLight:bool;
+        C_selLight:bool;
+        deselect:bool;
+        localLock:bool;
+        localUnlock:bool;)
+    (automaton $automaton0
+      initial state #6 LockLow
+      #pragma diagram {"xy":"h-11000;v2269","wh":"12000;12000"} #end :
+      state #7 LockHigh
+      #pragma diagram {"xy":"h11000;v2269","wh":"12000;12000"} #end :
+      :1: #6 unless if (LOCK)
+      {
+        emit 'lockSig;
+      }
+      restart #7
+      #pragma diagram {"tp":"h6000;v-38|#6 h3333 h3333 h-6000;v-38|#7"} #end;
+      :1: #7 unless if (LOCK)
+      {
+        emit 'unlockSig;
+      }
+      restart #6
+      #pragma diagram {"tp":"h200;v-6000|#7 v-500 v-500 v-500 v-1519 h-3038;v-1519 h-3038 h-7962 h-7962;v1269 v1269 v667 v667 h200;v-6000|#6"} #end;
+      #pragma diagram {"xy":"H79188;V9812","wh":"42000;24538"} #end)
+}
